@@ -10,8 +10,8 @@ export default function Greet({ name }: { name: string }) {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 20,
+    fontWeight: "semibold",
     color: "#181D28",
     // textAlign: "center",
     marginBottom: 8,

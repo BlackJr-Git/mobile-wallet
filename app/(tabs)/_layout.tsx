@@ -37,7 +37,7 @@ export default function TabLayout() {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
-          height: '100%',  
+          height: "100%",
           // backgroundColor: '#fff000',
         },
       }}
@@ -57,6 +57,15 @@ export default function TabLayout() {
           title: "Facture",
           tabBarIcon: ({ color }) => (
             <Icon name="ScrollText" size={28} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="scan"
+        options={{
+          title: "Scan",
+          tabBarIcon: ({ color }) => (
+            <Icon name="Scan" size={28} color={color} />
           ),
         }}
       />
