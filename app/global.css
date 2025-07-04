@@ -1,3 +1,127 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --background: 240 100% 98.0392%;
+  --foreground: 240 5.8824% 10%;
+  --card: 240 50% 96.0784%;
+  --card-foreground: 240 5.8824% 10%;
+  --popover: 240 50% 96.0784%;
+  --popover-foreground: 240 5.8824% 10%;
+  --primary: 230.3867 100% 64.5098%;
+  --primary-foreground: 240 100% 98.0392%;
+  --secondary: 240 15.7895% 92.549%;
+  --secondary-foreground: 240 5.8824% 10%;
+  --muted: 240 5.8824% 90%;
+  --muted-foreground: 240 3.8298% 46.0784%;
+  --accent: 221.8605 100% 74.7059%;
+  --accent-foreground: 240 100% 98.0392%;
+  --destructive: 8.5714 73.1343% 60.5882%;
+  --destructive-foreground: 240 100% 98.0392%;
+  --border: 240 4.878% 83.9216%;
+  --input: 240 33.3333% 94.1176%;
+  --ring: 221.8605 100% 74.7059%;
+  --chart-1: 230.3867 100% 64.5098%;
+  --chart-2: 211.4094 60.3239% 48.4314%;
+  --chart-3: 153.2773 47.7912% 48.8235%;
+  --chart-4: 8.5714 73.1343% 60.5882%;
+  --chart-5: 189.1765 100% 50%;
+  --sidebar: 240 50% 96.0784%;
+  --sidebar-foreground: 240 5.8824% 10%;
+  --sidebar-primary: 230.3867 100% 64.5098%;
+  --sidebar-primary-foreground: 240 100% 98.0392%;
+  --sidebar-accent: 221.8605 100% 74.7059%;
+  --sidebar-accent-foreground: 240 100% 98.0392%;
+  --sidebar-border: 240 4.878% 83.9216%;
+  --sidebar-ring: 221.8605 100% 74.7059%;
+  --font-sans:
+    Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, Times New Roman, Times, serif;
+  --font-mono: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  --radius: 1rem;
+  --shadow-2xs: 0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.05);
+  --shadow-sm:
+    0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.1),
+    0rem 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow:
+    0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.1),
+    0rem 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md:
+    0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.1),
+    0rem 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg:
+    0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.1),
+    0rem 4px 6px -1px hsl(0 0% 0% / 0.1);
+  --shadow-xl:
+    0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.1),
+    0rem 8px 10px -1px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.25);
+  --tracking-normal: -0.025em;
+  --spacing: 0.25rem;
+}
+
+.dark {
+  --background: 240 10% 3.9216%;
+  --foreground: 240 11.5385% 89.8039%;
+  --card: 240 12.1951% 8.0392%;
+  --card-foreground: 240 11.5385% 89.8039%;
+  --popover: 240 12.1951% 8.0392%;
+  --popover-foreground: 240 11.5385% 89.8039%;
+  --primary: 230.3867 100% 64.5098%;
+  --primary-foreground: 240 11.5385% 89.8039%;
+  --secondary: 240 7.3171% 16.0784%;
+  --secondary-foreground: 240 11.5385% 89.8039%;
+  --muted: 240 8.2353% 16.6667%;
+  --muted-foreground: 240 5.0279% 64.902%;
+  --accent: 221.8605 100% 74.7059%;
+  --accent-foreground: 228.3871 60.7843% 10%;
+  --destructive: 8.5714 73.1343% 60.5882%;
+  --destructive-foreground: 240 10% 3.9216%;
+  --border: 240 5.2632% 26.0784%;
+  --input: 240 9.6774% 12.1569%;
+  --ring: 221.8605 100% 74.7059%;
+  --chart-1: 230.3867 100% 64.5098%;
+  --chart-2: 211.4094 60.3239% 48.4314%;
+  --chart-3: 153.2773 47.7912% 48.8235%;
+  --chart-4: 8.5714 73.1343% 60.5882%;
+  --chart-5: 189.1765 100% 50%;
+  --sidebar: 240 12.1951% 8.0392%;
+  --sidebar-foreground: 240 11.5385% 89.8039%;
+  --sidebar-primary: 230.3867 100% 64.5098%;
+  --sidebar-primary-foreground: 240 11.5385% 89.8039%;
+  --sidebar-accent: 221.8605 100% 74.7059%;
+  --sidebar-accent-foreground: 228.3871 60.7843% 10%;
+  --sidebar-border: 240 5.2632% 26.0784%;
+  --sidebar-ring: 221.8605 100% 74.7059%;
+  --font-sans:
+    Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, Times New Roman, Times, serif;
+  --font-mono: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  --radius: 1rem;
+  --shadow-2xs: 0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.05);
+  --shadow-sm:
+    0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.1),
+    0rem 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow:
+    0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.1),
+    0rem 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md:
+    0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.1),
+    0rem 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg:
+    0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.1),
+    0rem 4px 6px -1px hsl(0 0% 0% / 0.1);
+  --shadow-xl:
+    0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.1),
+    0rem 8px 10px -1px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0rem 0.125rem 0.5rem 0rem hsl(0 0% 0% / 0.25);
+}
+
+body {
+  letter-spacing: var(--tracking-normal);
+}

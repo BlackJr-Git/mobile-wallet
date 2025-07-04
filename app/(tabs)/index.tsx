@@ -1,7 +1,6 @@
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 // import { ThemedText } from '@/components/ThemedText';
 import Greet from "@/components/Greet";
-import { ThemedView } from "@/components/ThemedView";
 import Icon from "@/components/ui/Icon";
 import Logo from "@/components/ui/Logo";
 import PressableIcon from "@/components/ui/PressableIcon";
@@ -60,25 +59,31 @@ const promotions: PromotionItemProps[] = [
 
 export default function HomeScreen() {
   return (
-    <ThemedView style={styles.container}>
-      <View style={styles.header}>
+    <ScrollView className="w-full px-6 relative pt-24">
+      <View className="w-full flex-row items-center justify-between absolute">
         <PressableIcon onPress={() => {}} name="LayoutGrid" color="#4A67FF" />
         <Logo variant="default" size="small" />
         <PressableIcon onPress={() => {}} name="Bell" color="#4A67FF" />
       </View>
-      <View className="w-full">
-        <Greet name="Junior asosa" />
-        <Text className="text-slate-500">Votre solde disponible</Text>
+      <View className="w-full mt-20">
+        <Greet name="Junior" />
+        <Text className="text-foreground dark:text-white">
+          Votre solde disponible
+        </Text>
       </View>
       <View className="w-full flex-row border border-indigo-500 rounded-2xl p-6 mt-4">
         <View className="flex-1 items-center justify-between">
-          <Text className="text-indigo-950 text-2xl font-bold">1,000</Text>
-          <Text className="text-indigo-950">USD</Text>
+          <Text className="text-foreground dark:text-white text-2xl font-bold">
+            1,035,000
+          </Text>
+          <Text className="text-foreground dark:text-white">USD</Text>
         </View>
         <View className="bg-indigo-200 w-[1px] h-full"></View>
         <View className="flex-1 items-center justify-between">
-          <Text className="text-indigo-950 text-2xl font-bold">2,000,000</Text>
-          <Text className="text-indigo-950">CDF</Text>
+          <Text className="text-foreground dark:text-white text-2xl font-bold">
+            2,000,000
+          </Text>
+          <Text className="text-foreground dark:text-white">CDF</Text>
         </View>
       </View>
       <View className="w-full flex-row border border-indigo-500 bg-indigo-500 rounded-2xl p-4 mt-4">
@@ -109,10 +114,10 @@ export default function HomeScreen() {
         <ServiceItem icon="Grid2x2Plus" iconColor="#4A67FF" title="Plus" />
       </View>
 
-      <View>
+      <View className="w-full">
         <View className="flex-row items-center justify-between w-full">
-          <Text className="text-xl font-bold">Promotions</Text>
-          <Text className="text-slate-500">Voir plus</Text>
+          <Text className="text-xl font-bold dark:text-white">Promotions</Text>
+          <Text className="text-slate-500 dark:text-white">Voir plus</Text>
         </View>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -127,17 +132,17 @@ export default function HomeScreen() {
           ))}
         </View>
       </ScrollView>
-    </ThemedView>
+    </ScrollView>
   );
 }
 
 function ServiceItem({ icon, title, iconColor }: ServiceItemProps) {
   return (
     <View className="flex-1 items-center justify-between">
-      <View className="items-center bg-gray-100 p-6 rounded-3xl">
+      <View className="items-center bg-gray-200 dark:bg-gray-800 p-6 rounded-3xl">
         <Icon name={icon} size={28} color={iconColor} />
       </View>
-      <Text className="text-slate-500 mt-2">{title}</Text>
+      <Text className="text-slate-500 mt-2 dark:text-white">{title}</Text>
     </View>
   );
 }
@@ -159,29 +164,29 @@ function PromotionItem({ title, description, image }: PromotionItemProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    // justifyContent: "center",
-    paddingVertical: 64,
-    paddingHorizontal: 24,
-    position: "relative",
-    backgroundColor: "#fff",
-    paddingTop: 152,
-  },
-  header: {
-    position: "absolute",
-    zIndex: 10,
-    top: 48,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    justifyContent: "space-between",
-    width: "100%",
-    // paddingHorizontal: 24,
-    paddingTop: 24,
-    backgroundColor: "#fff",
-    marginBottom: "auto",
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     alignItems: "center",
+//     // justifyContent: "center",
+//     paddingVertical: 64,
+//     paddingHorizontal: 24,
+//     position: "relative",
+//     backgroundColor: "#fff",
+//     paddingTop: 152,
+//   },
+//   header: {
+//     position: "absolute",
+//     zIndex: 10,
+//     top: 48,
+//     flexDirection: "row",
+//     alignItems: "center",
+//     gap: 8,
+//     justifyContent: "space-between",
+//     width: "100%",
+//     // paddingHorizontal: 24,
+//     paddingTop: 24,
+//     backgroundColor: "#fff",
+//     marginBottom: "auto",
+//   },
+// });
