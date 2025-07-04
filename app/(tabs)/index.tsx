@@ -121,7 +121,7 @@ export default function HomeScreen() {
         </View>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <View className="flex-row gap-1 px-6">
+        <View className="flex-row gap-1">
           {promotions.map((promotion) => (
             <PromotionItem
               key={promotion.title}
