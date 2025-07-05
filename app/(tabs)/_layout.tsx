@@ -1,6 +1,6 @@
 import { Tabs } from "expo-router";
 import React from "react";
-import { Platform } from "react-native";
+import { Platform, View } from "react-native";
 
 // import TabBarBackground from '@/components/ui/TabBarBackground';
 import Icon from "@/components/ui/Icon";
@@ -63,7 +63,9 @@ export default function TabLayout() {
         options={{
           title: "Scan",
           tabBarIcon: ({ color }) => (
-            <Icon name="Scan" size={28} color={color} />
+            <View className="w-full h-full items-center justify-center p-4 mb-8">
+              <Icon name="Scan" size={48} color={color} />
+            </View>
           ),
         }}
       />

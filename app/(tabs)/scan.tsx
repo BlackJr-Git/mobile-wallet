@@ -1,189 +1,265 @@
-import Greet from "@/components/Greet";
-import { useState } from "react";
+import ProfileSheet from "@/components/home/ProfileSheet";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
+import PressableIcon from "@/components/ui/PressableIcon";
+import { CameraType, CameraView, useCameraPermissions } from "expo-camera";
+import React, { useEffect, useState } from "react";
 import {
-  ActivityIndicator,
-  Alert,
-  Button,
-  Image,
-  ImageBackground,
-  Modal,
-  Pressable,
+  // Button,
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
-const logoImage = require("../../assets/images/react-logo.png");
-const background = require("../../assets/images/bg-main.png");
 
-export default function LoginScreen() {
-  const [modalVisible, setModalVisible] = useState(false);
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [showPassword, setShowPassword] = useState(false);
+const validQrCode = [
+  "1234567890",
+  "12345237890",
+  "123423467890",
+  "12346767890",
+  "12346767890",
+];
 
-  const toggleModal = () => {
-    setModalVisible(!modalVisible);
-  };
+export default function ScanScreen() {
+  const [facing, setFacing] = useState<CameraType>("back");
+  const [permission, requestPermission] = useCameraPermissions();
+  const [scanned, setScanned] = useState(false);
+
+  useEffect(() => {
+    if (scanned) {
+      setTimeout(() => {
+        setScanned(false);
+      }, 2000);
+    }
+  }, [scanned]);
+
+  if (!permission) {
+    // Camera permissions are still loading.
+    return (
+      <View style={styles.container}>
+        <Text style={styles.message}>
+          Nous avons besoin de votre permission pour afficher la camera
+        </Text>
+        <Button onPress={requestPermission} title="autoriser" />
+      </View>
+    );
+  }
+
+  if (!permission.granted) {
+    // Camera permissions are not granted yet.
+    return (
+      <View style={styles.container}>
+        <Text style={styles.message}>
+          Nous avons besoin de votre permission pour afficher la camera
+        </Text>
+        <Button onPress={requestPermission} title="autoriser" />
+      </View>
+    );
+  }
+
+  function toggleCameraFacing() {
+    setFacing((current) => (current === "back" ? "front" : "back"));
+  }
+
+  function handleBarcodeScanned({ data }: { data: string }) {
+    if (validQrCode.includes(data)) {
+      console.log("QR code valid");
+    } else {
+      console.log("QR code invalid");
+    }
+    setScanned(true);
+  }
 
   return (
-    <ImageBackground
-      source={background}
-      style={styles.background}
-      resizeMode="cover"
-    >
-      <StatusBar />
-      <View style={styles.card}>
-        <Greet name="Junior" />
-        <Pressable onPress={toggleModal}>
-          <Image source={logoImage} style={styles.logoImage} />
-        </Pressable>
-        <Button title="Go to Home" onPress={toggleModal} color="#FF8A00" />
-        <Button
-          title="Show Alert"
-          onPress={() =>
-            Alert.alert("Alert", "This is an alert", [
-              {
-                text: "Cancel",
-                onPress: () => console.log("Cancel Pressed"),
-                style: "cancel",
-              },
-              {
-                text: "OK",
-                onPress: () => console.log("OK Pressed"),
-              },
-            ])
-          }
-          color="#008A07"
-        />
-        <ActivityIndicator size="large" color="#FF8A00" animating={false} />
-      </View>
-      <Modal
-        visible={modalVisible}
-        animationType="slide"
-        onRequestClose={toggleModal}
-        presentationStyle="pageSheet"
-      >
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+    <View className="flex-1 relative">
+      <StatusBar barStyle="dark-content" />
+      {/* Header with absolute positioning */}
+      <View style={styles.header} className="bg-background-0">
+        <ProfileSheet />
+        <Text
+          style={styles.headerText}
+          className="text-foreground dark:text-white"
         >
-          <Text>Modal</Text>
-          <Image source={logoImage} style={styles.logoImage} />
-          <Button title="Close Modal" onPress={toggleModal} color="#FF8A00" />
+          Scanner pour payer
+        </Text>
+        <PressableIcon onPress={() => {}} name="Bell" color="#4A67FF" />
+      </View>
+
+      {/* Camera container */}
+      <View style={styles.cameraContainer}>
+        <CameraView
+          barcodeScannerSettings={{
+            barcodeTypes: ["qr"],
+          }}
+          onBarcodeScanned={handleBarcodeScanned}
+          style={styles.camera}
+          facing={facing}
+        />
+        <View style={stylesQr.lens}>
+          {/* 4 coins */}
+          <View style={[stylesQr.corner, stylesQr.topLeft]} />
+          <View style={[stylesQr.corner, stylesQr.topRight]} />
+          <View style={[stylesQr.corner, stylesQr.bottomLeft]} />
+          <View style={[stylesQr.corner, stylesQr.bottomRight]} />
         </View>
-      </Modal>
-    </ImageBackground>
+
+        {/* Overlay buttons with absolute positioning */}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
+            <Text style={styles.text}>Flip Camera</Text>
+          </TouchableOpacity>
+        </View>
+        <View className="absolute bottom-24 bg-transparent mx-auto px-4 py-8 w-full">
+          <View className="w-full bg-background-0 rounded-2xl p-4">
+            <Text className="text-center text-xl dark:text-white">
+              Utiliser un code de paiement
+            </Text>
+            <Input placeholder="Code de paiement" label="" />
+            <Button title="Continuer" onPress={() => {}} />
+          </View>
+        </View>
+      </View>
+
+      {scanned && (
+        <View style={styles.scanSuccessOverlay}>
+          <Text style={styles.scanSuccessText}>QR Code détecté !</Text>
+        </View>
+      )}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
+  container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
   },
-  logoImage: {
-    width: 100,
-    height: 100,
-  },
-  logoContainer: {
-    marginTop: 60,
-    marginBottom: 20,
-    alignItems: "center",
-  },
-  logoText: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 20,
-    letterSpacing: 1,
-    marginBottom: 20,
-  },
-  card: {
-    backgroundColor: "#fff",
-    borderRadius: 16,
-    paddingVertical: 32,
-    paddingHorizontal: 24,
-    width: "90%",
-    maxWidth: 370,
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: "bold",
-    color: "#181D28",
+  message: {
     textAlign: "center",
-    marginBottom: 8,
+    paddingBottom: 10,
   },
-  rowCenter: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 16,
+  mainContainer: {
+    flex: 1,
+    position: "relative",
+    backgroundColor: "#000", // Dark background for camera visibility
   },
-  subText: {
-    color: "#8C8C8C",
-    fontSize: 14,
-  },
-  link: {
-    color: "#FF8A00",
-    fontWeight: "600",
-    fontSize: 14,
-  },
-  label: {
-    fontSize: 14,
-    color: "#181D28",
-    marginBottom: 6,
-    marginTop: 12,
-    fontWeight: "500",
-  },
-  input: {
-    backgroundColor: "#F6F6F6",
-    borderRadius: 8,
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    fontSize: 15,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: "#ECECEC",
-  },
-  passwordContainer: {
+  header: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#F6F6F6",
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#ECECEC",
-    marginBottom: 8,
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingTop: 64,
+    paddingBottom: 16,
+    // height: 60,
+    // backgroundColor: "#fff", // Make header visible
+    zIndex: 10,
+    width: "100%",
+    position: "absolute",
+    // top: 48, // Add space for status bar
   },
-  eyeIcon: {
-    paddingHorizontal: 10,
-  },
-  forgotContainer: {
-    alignSelf: "flex-end",
-    marginBottom: 16,
-  },
-  forgotText: {
-    color: "#FF8A00",
-    fontSize: 13,
-    fontWeight: "500",
-  },
-  button: {
-    backgroundColor: "#FF8A00",
-    borderRadius: 12,
-    paddingVertical: 14,
-    alignItems: "center",
-    marginTop: 10,
-  },
-  buttonText: {
-    color: "#fff",
+  headerText: {
     fontSize: 18,
     fontWeight: "bold",
+    // color: "#fff",
+  },
+  cameraContainer: {
+    flex: 1,
+    marginTop: 64, // Give space for header
+  },
+  camera: {
+    flex: 1,
+  },
+  buttonContainer: {
+    position: "absolute",
+    bottom: 30,
+    left: 0,
+    right: 0,
+    flexDirection: "row",
+    backgroundColor: "transparent",
+    justifyContent: "center",
+  },
+  button: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 20,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    alignItems: "center",
+  },
+  text: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "white",
+  },
+  lens: {
+    position: "absolute",
+    top: "16%",
+    left: "10%",
+    width: "80%",
+    height: "40%",
+    borderWidth: 4,
+    borderColor: "#4A67FF",
+    borderRadius: 16,
+    zIndex: 20,
+  },
+  scanSuccessOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0,200,0,0.2)",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 30,
+  },
+  scanSuccessText: {
+    color: "#fff",
+    fontSize: 32,
+    fontWeight: "bold",
+    backgroundColor: "rgba(0,200,0,0.7)",
+    padding: 16,
+    borderRadius: 12,
+  },
+});
+
+const stylesQr = StyleSheet.create({
+  lens: {
+    position: "absolute",
+    top: "16%",
+    left: "10%",
+    width: "80%",
+    height: "40%",
+    zIndex: 20,
+  },
+  corner: {
+    position: "absolute",
+    width: 60,
+    height: 60,
+    borderColor: "#4A67FF",
+  },
+  topLeft: {
+    top: 0,
+    left: 0,
+    borderTopWidth: 4,
+    borderLeftWidth: 4,
+    borderTopLeftRadius: 16,
+  },
+  topRight: {
+    top: 0,
+    right: 0,
+    borderTopWidth: 4,
+    borderRightWidth: 4,
+    borderTopRightRadius: 16,
+  },
+  bottomLeft: {
+    bottom: 0,
+    left: 0,
+    borderBottomWidth: 4,
+    borderLeftWidth: 4,
+    borderBottomLeftRadius: 16,
+  },
+  bottomRight: {
+    bottom: 0,
+    right: 0,
+    borderBottomWidth: 4,
+    borderRightWidth: 4,
+    borderBottomRightRadius: 16,
   },
 });

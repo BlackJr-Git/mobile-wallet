@@ -61,7 +61,7 @@ const promotions: PromotionItemProps[] = [
 export default function HomeScreen() {
   return (
     <View className="w-full relative mt-24">
-      <View className="w-full flex-row items-center justify-between absolute px-6 z-10 bg-background-0">
+      <View className="w-full flex-row items-center justify-between absolute px-6 z-10 bg-background">
         <ProfileSheet />
         <Logo variant="default" size="small" />
         <PressableIcon onPress={() => {}} name="Bell" color="#4A67FF" />
