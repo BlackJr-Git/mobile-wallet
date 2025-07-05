@@ -18,7 +18,7 @@ export default function PressableIcon({
     <View>
       <Pressable
         onPress={onPress}
-        className="w-12 h-12 rounded-2xl p-6 flex border-2 border-primary/10 items-center justify-center"
+        className="w-12 h-12 rounded-2xl p-6 flex border-2 border-indigo-100 dark:border-indigo-800 items-center justify-center"
       >
         <Icon name={name} size={32} color={color} />
       </Pressable>

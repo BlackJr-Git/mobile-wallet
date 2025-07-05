@@ -1,6 +1,7 @@
 import { Image, ScrollView, Text, View } from "react-native";
 // import { ThemedText } from '@/components/ThemedText';
 import Greet from "@/components/Greet";
+import ProfileSheet from "@/components/home/ProfileSheet";
 import Icon from "@/components/ui/Icon";
 import Logo from "@/components/ui/Logo";
 import PressableIcon from "@/components/ui/PressableIcon";
@@ -59,80 +60,84 @@ const promotions: PromotionItemProps[] = [
 
 export default function HomeScreen() {
   return (
-    <ScrollView className="w-full px-6 relative pt-24">
-      <View className="w-full flex-row items-center justify-between absolute">
-        <PressableIcon onPress={() => {}} name="LayoutGrid" color="#4A67FF" />
+    <View className="w-full relative mt-24">
+      <View className="w-full flex-row items-center justify-between absolute px-6 z-10 bg-background-0">
+        <ProfileSheet />
         <Logo variant="default" size="small" />
         <PressableIcon onPress={() => {}} name="Bell" color="#4A67FF" />
       </View>
-      <View className="w-full mt-20">
-        <Greet name="Junior" />
-        <Text className="text-foreground dark:text-white">
-          Votre solde disponible
-        </Text>
-      </View>
-      <View className="w-full flex-row border border-indigo-500 rounded-2xl p-6 mt-4">
-        <View className="flex-1 items-center justify-between">
-          <Text className="text-foreground dark:text-white text-2xl font-bold">
-            1,035,000
+      <ScrollView className="w-full px-6">
+        <View className="w-full mt-20">
+          <Greet name="Junior" />
+          <Text className="text-foreground dark:text-white">
+            Votre solde disponible
           </Text>
-          <Text className="text-foreground dark:text-white">USD</Text>
         </View>
-        <View className="bg-indigo-200 w-[1px] h-full"></View>
-        <View className="flex-1 items-center justify-between">
-          <Text className="text-foreground dark:text-white text-2xl font-bold">
-            2,000,000
-          </Text>
-          <Text className="text-foreground dark:text-white">CDF</Text>
+        <View className="w-full flex-row border border-indigo-500 rounded-2xl p-6 mt-4">
+          <View className="flex-1 items-center justify-between">
+            <Text className="text-foreground dark:text-white text-2xl font-bold">
+              1,035,000
+            </Text>
+            <Text className="text-foreground dark:text-white">USD</Text>
+          </View>
+          <View className="bg-indigo-200 w-[1px] h-full"></View>
+          <View className="flex-1 items-center justify-between">
+            <Text className="text-foreground dark:text-white text-2xl font-bold">
+              2,000,000
+            </Text>
+            <Text className="text-foreground dark:text-white">CDF</Text>
+          </View>
         </View>
-      </View>
-      <View className="w-full flex-row border border-indigo-500 bg-indigo-500 rounded-2xl p-4 mt-4">
-        <View className="flex-1 items-center justify-between">
-          <Icon name="ArrowRightLeft" size={32} color="#fff" />
-          <Text className="text-white mt-2">Transférer</Text>
+        <View className="w-full flex-row border border-indigo-500 bg-indigo-500 rounded-2xl p-4 mt-4">
+          <View className="flex-1 items-center justify-between">
+            <Icon name="ArrowRightLeft" size={32} color="#fff" />
+            <Text className="text-white mt-2">Transférer</Text>
+          </View>
+          <View className="bg-indigo-200 w-[1px] h-full"></View>
+          <View className="flex-1 items-center justify-between">
+            <Icon name="BanknoteArrowUp" size={32} color="#fff" />
+            <Text className="text-white mt-2">Appro</Text>
+          </View>
+          <View className="bg-indigo-200 w-[1px] h-full"></View>
+          <View className="flex-1 items-center justify-between">
+            <Icon name="History" size={32} color="#fff" />
+            <Text className="text-white mt-2">Historique</Text>
+          </View>
         </View>
-        <View className="bg-indigo-200 w-[1px] h-full"></View>
-        <View className="flex-1 items-center justify-between">
-          <Icon name="BanknoteArrowUp" size={32} color="#fff" />
-          <Text className="text-white mt-2">Appro</Text>
-        </View>
-        <View className="bg-indigo-200 w-[1px] h-full"></View>
-        <View className="flex-1 items-center justify-between">
-          <Icon name="History" size={32} color="#fff" />
-          <Text className="text-white mt-2">Historique</Text>
-        </View>
-      </View>
-      <View className="w-full flex-row my-6">
-        {services.map((service) => (
-          <ServiceItem
-            key={service.title}
-            icon={service.icon}
-            iconColor={service.iconColor}
-            title={service.title}
-          />
-        ))}
-        <ServiceItem icon="Grid2x2Plus" iconColor="#4A67FF" title="Plus" />
-      </View>
-
-      <View className="w-full">
-        <View className="flex-row items-center justify-between w-full">
-          <Text className="text-xl font-bold dark:text-white">Promotions</Text>
-          <Text className="text-slate-500 dark:text-white">Voir plus</Text>
-        </View>
-      </View>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <View className="flex-row gap-1">
-          {promotions.map((promotion) => (
-            <PromotionItem
-              key={promotion.title}
-              title={promotion.title}
-              description={promotion.description}
-              image={promotion.image}
+        <View className="w-full flex-row my-6">
+          {services.map((service) => (
+            <ServiceItem
+              key={service.title}
+              icon={service.icon}
+              iconColor={service.iconColor}
+              title={service.title}
             />
           ))}
+          <ServiceItem icon="Grid2x2Plus" iconColor="#4A67FF" title="Plus" />
         </View>
+
+        <View className="w-full">
+          <View className="flex-row items-center justify-between w-full">
+            <Text className="text-xl font-bold dark:text-white">
+              Promotions
+            </Text>
+            <Text className="text-slate-500 dark:text-white">Voir plus</Text>
+          </View>
+        </View>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <View className="flex-row gap-1">
+            {promotions.map((promotion) => (
+              <PromotionItem
+                key={promotion.title}
+                title={promotion.title}
+                description={promotion.description}
+                image={promotion.image}
+              />
+            ))}
+          </View>
+        </ScrollView>
       </ScrollView>
-    </ScrollView>
+    </View>
   );
 }
 
