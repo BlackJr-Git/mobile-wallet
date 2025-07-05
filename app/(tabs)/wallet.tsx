@@ -1,13 +1,10 @@
-import { Image, ScrollView, Text, View } from "react-native";
-// import { ThemedText } from '@/components/ThemedText';
 import ProfileSheet from "@/components/home/ProfileSheet";
+import { Divider } from "@/components/ui/divider";
 import Icon from "@/components/ui/Icon";
-import Logo from "@/components/ui/Logo";
 import PressableIcon from "@/components/ui/PressableIcon";
-
-const promo1Img = require("../../assets/images/promo-1.png");
-const promo2Img = require("../../assets/images/promo-2.png");
-const simImg = require("../../assets/images/sim.png");
+import CreditCard from "@/components/Wallets/CreditCard";
+import TransactionCard from "@/components/Wallets/TransactionCard";
+import { ColorValue, ScrollView, Text, View } from "react-native";
 
 type CreditCardItemProps = {
   id: number;
@@ -16,6 +13,7 @@ type CreditCardItemProps = {
   currency: string;
   userName: string;
   image: string;
+  colors: readonly [ColorValue, ColorValue, ...ColorValue[]];
 };
 
 const creditCards: CreditCardItemProps[] = [
@@ -26,6 +24,7 @@ const creditCards: CreditCardItemProps[] = [
     currency: "USD",
     userName: "Junior Asosa",
     image: "promo-1",
+    colors: ["#a855f7", "#6366f1"] as const,
   },
   {
     id: 2,
@@ -34,10 +33,58 @@ const creditCards: CreditCardItemProps[] = [
     currency: "CDF",
     userName: "Junior Asosa",
     image: "promo-2",
+    colors: ["#4A67FF", "#00FF94"] as const,
   },
 ];
 
-export default function HomeScreen() {
+const Transactions = [
+  {
+    id: 1,
+    type: "payment",
+    merchant: "PME.CD",
+    date: "2025-07-05T14:32:00Z",
+    amount: 25000,
+    status: "success",
+    currency: "USD",
+  },
+  {
+    id: 2,
+    type: "withdrawal",
+    merchant: "Rawbank",
+    date: "2025-07-04T09:15:43Z",
+    amount: 15000,
+    status: "pending",
+    currency: "USD",
+  },
+  {
+    id: 3,
+    type: "deposit",
+    // merchant: "Merchant 3",
+    date: "2025-07-03T18:22:10Z",
+    amount: 50000,
+    status: "success",
+    currency: "USD",
+  },
+  {
+    id: 4,
+    type: "transfer",
+    date: "2025-07-02T22:45:00Z",
+    amount: 10000,
+    status: "failed",
+    currency: "USD",
+  },
+  {
+    id: 5,
+    type: "payment",
+    merchant: "FOGEC",
+    date: "2025-07-01T11:05:20Z",
+    amount: 32000,
+    status: "success",
+    currency: "USD",
+  },
+];
+
+export default function WalletScreen() {
   return (
     <View className="w-full relative mt-24">
       <View className="w-full flex-row items-center justify-between absolute px-6 z-10 bg-background-0">
@@ -48,11 +95,11 @@ export default function HomeScreen() {
         </Text>
         <PressableIcon onPress={() => {}} name="Bell" color="#4A67FF" />
       </View>
-      <ScrollView className="h-full w-full px-6 mt-20">
+      <ScrollView className="w-full px-6 mt-20 mb-32">
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View className="flex-row gap-1 mt-4">
             {creditCards.map((creditCard) => (
-              <CreditCardItem
+              <CreditCard
                 key={creditCard.id}
                 id={creditCard.id}
                 accountNumber={creditCard.accountNumber}
@@ -60,6 +107,7 @@ export default function HomeScreen() {
                 currency={creditCard.currency}
                 userName={creditCard.userName}
                 image={creditCard.image}
+                colors={creditCard.colors}
               />
             ))}
           </View>
@@ -75,62 +123,19 @@ export default function HomeScreen() {
             <Text className="text-white mt-2">Approvisionner</Text>
           </View>
         </View>
+        <View className="w-full border border-indigo-50 dark:border-indigo-800 rounded-2xl p-4 mt-4">
+          <View className="flex-1 flex-row items-center justify-between mb-4">
+            <Text className="text-white mt-2">Transactions recentes</Text>
+            <Text className="text-white mt-2">Voir plus</Text>
+          </View>
+          <Divider />
+          <View className="w-full flex-col gap-2 mt-4">
+            {Transactions.map((transaction) => (
+              <TransactionCard key={transaction.id} transaction={transaction} />
+            ))}
+          </View>
+        </View>
       </ScrollView>
-    </View>
-  );
-}
-
-const images: { [key: string]: any } = {
-  "promo-1": promo1Img,
-  "promo-2": promo2Img,
-};
-
-function CreditCardItem({
-  id,
-  accountNumber,
-  balance,
-  currency,
-  userName,
-  image,
-}: CreditCardItemProps) {
-  return (
-    <View className="items-center justify-between rounded-2xl mr-4 w-[320px] h-[192px] bg-red-500 p-4">
-      <View className="flex-row items-center justify-between w-full">
-        <Logo variant="default" size="small" withText />
-        <Image source={simImg} className="w-12 h-12" />
-      </View>
-      <View className="flex-row items-center gap-2 w-full justify-between">
-        <Text className="text-foreground dark:text-white text-lg font-bold">
-          {accountNumber.slice(0, 4) +
-            " " +
-            accountNumber.slice(4, 8) +
-            " " +
-            accountNumber.slice(8, 12) +
-            " " +
-            accountNumber.slice(12, 16)}
-        </Text>
-        <Text className="text-foreground dark:text-white text-lg font-bold">
-          {balance} {currency === "CDF" ? "fc" : "$"}
-        </Text>
-      </View>
-      <View className="w-full flex-row justify-between">
-        <View className="flex-col gap-1">
-          <Text className="text-foreground dark:text-white text-sm">
-            Nom du titulaire
-          </Text>
-          <Text className="text-foreground dark:text-white text-base font-bold">
-            {userName}
-          </Text>
-        </View>
-        <View className="flex-col gap-1">
-          <Text className="text-foreground dark:text-white text-sm">
-            Portmonnaie
-          </Text>
-          <Text className="text-foreground dark:text-white text-base font-bold">
-            {currency === "CDF" ? "Francs Congolais" : "Dollars"}
-          </Text>
-        </View>
-      </View>
     </View>
   );
 }
