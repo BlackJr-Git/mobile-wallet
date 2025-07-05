@@ -66,8 +66,8 @@ export default function HomeScreen() {
         <Logo variant="default" size="small" />
         <PressableIcon onPress={() => {}} name="Bell" color="#4A67FF" />
       </View>
-      <ScrollView className="w-full px-6">
-        <View className="w-full mt-20">
+      <ScrollView className="w-full px-6 mt-20">
+        <View className="w-full">
           <Greet name="Junior" />
           <Text className="text-foreground dark:text-white">
             Votre solde disponible

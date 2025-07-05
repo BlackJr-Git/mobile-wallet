@@ -33,7 +33,14 @@ export default function Logo({ variant, size, withText }: Props) {
           style={[styles.logoImage, { width, height }]}
         />
       )}
-      {withText && <Text style={[styles.logoText, { fontSize }]}>F-Pay</Text>}
+      {withText && (
+        <Text
+          className="text-foreground dark:text-white"
+          style={[styles.logoText, { fontSize }]}
+        >
+          F-Pay
+        </Text>
+      )}
     </View>
   );
 }
