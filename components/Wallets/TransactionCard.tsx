@@ -39,7 +39,7 @@ export default function TransactionItem({
         />
       </View>
       <View className="flex-1 ml-4">
-        <Text className="text-white mt-2">
+        <Text className=" dark:text-white mt-2 font-semibold">
           {transaction.type === "payment"
             ? "Paiement"
             : transaction.type === "withdrawal"
@@ -51,12 +51,12 @@ export default function TransactionItem({
             : "Autre"}{" "}
           {transaction.merchant ? `- ${transaction.merchant}` : ""}
         </Text>
-        <Text className="text-white mt-2">
+        <Text className="text-slate-600 dark:text-white mt-2">
           {formatDateTimeFR(transaction.date)}
         </Text>
       </View>
       <View>
-        <Text className="text-white mt-2 font-bold text-lg">
+        <Text className="text-foreground dark:text-white mt-2 font-bold text-lg">
           {transaction.currency === "CDF" ? "Fc" : "$"} {transaction.amount}
         </Text>
         <Text

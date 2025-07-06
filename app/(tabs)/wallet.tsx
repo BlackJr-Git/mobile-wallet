@@ -125,8 +125,8 @@ export default function WalletScreen() {
         </View>
         <View className="w-full border border-indigo-50 dark:border-indigo-800 rounded-2xl p-4 mt-4">
           <View className="flex-1 flex-row items-center justify-between mb-4">
-            <Text className="text-white mt-2">Transactions recentes</Text>
-            <Text className="text-white mt-2">Voir plus</Text>
+            <Text className="dark:text-white mt-2">Transactions recentes</Text>
+            <Text className="dark:text-white mt-2">Voir plus</Text>
           </View>
           <Divider />
           <View className="w-full flex-col gap-2 mt-4">

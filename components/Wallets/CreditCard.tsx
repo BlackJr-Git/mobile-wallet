@@ -43,7 +43,7 @@ export default function CreditCardItem({
         <SimImg className="w-24 h-24" />
       </View>
       <View className="flex-row items-center gap-2 w-full justify-between">
-        <Text className="text-foreground dark:text-white text-lg font-bold">
+        <Text className="text-white text-lg font-bold">
           {accountNumber.slice(0, 4) +
             " " +
             accountNumber.slice(4, 8) +
@@ -52,24 +52,18 @@ export default function CreditCardItem({
             " " +
             accountNumber.slice(12, 16)}
         </Text>
-        <Text className="text-foreground dark:text-white text-lg font-bold">
+        <Text className="text-white text-lg font-bold">
           {balance} {currency === "CDF" ? "Fc" : "$"}
         </Text>
       </View>
       <View className="w-full flex-row justify-between">
         <View className="flex-col gap-1">
-          <Text className="text-foreground dark:text-white text-sm">
-            Nom du titulaire
-          </Text>
-          <Text className="text-foreground dark:text-white text-base font-bold">
-            {userName}
-          </Text>
+          <Text className="text-white text-sm">Nom du titulaire</Text>
+          <Text className="text-white text-base font-bold">{userName}</Text>
         </View>
         <View className="flex-col gap-1">
-          <Text className="text-foreground dark:text-white text-sm">
-            Portmonnaie
-          </Text>
-          <Text className="text-foreground dark:text-white text-base font-bold">
+          <Text className="text-white text-sm">Portmonnaie</Text>
+          <Text className="text-white text-base font-bold">
             {currency === "CDF" ? "Francs Congolais" : "Dollars"}
           </Text>
         </View>
