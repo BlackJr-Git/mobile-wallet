@@ -52,7 +52,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="factures"
         options={{
-          title: "Facture",
+          title: "Factures",
           tabBarIcon: ({ color }) => (
             <Icon name="ScrollText" size={28} color={color} />
           ),
@@ -72,7 +72,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="wallet"
         options={{
-          title: "Wallet",
+          title: "Wallets",
           tabBarIcon: ({ color }) => (
             // <IconSymbol size={28} name="wallet.fill" color={color} />
             <Icon name="Wallet" size={28} color={color} />

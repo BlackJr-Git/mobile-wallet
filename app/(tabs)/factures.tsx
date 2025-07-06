@@ -1,190 +1,142 @@
-import Greet from "@/components/Greet";
-import { useState } from "react";
-import {
-  ActivityIndicator,
-  Alert,
-  Button,
-  Image,
-  ImageBackground,
-  Modal,
-  Pressable,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import ProfileSheet from "@/components/home/ProfileSheet";
+import NotificationsModal from "@/components/notifications/NotificationsModal";
+import { Divider } from "@/components/ui/divider";
+import PressableIcon from "@/components/ui/PressableIcon";
+import SelectInput from "@/components/ui/SelectInput";
+import TransactionCard from "@/components/Wallets/TransactionCard";
+import { ScrollView, Text, View } from "react-native";
 
-const logoImage = require("../../assets/images/react-logo.png");
-const background = require("../../assets/images/bg-main.png");
+const Transactions = [
+  {
+    id: 1,
+    type: "payment",
+    merchant: "PME.CD",
+    date: "2025-07-05T14:32:00Z",
+    amount: 25000,
+    status: "success",
+    currency: "USD",
+  },
+  {
+    id: 2,
+    type: "withdrawal",
+    merchant: "Rawbank",
+    date: "2025-07-04T09:15:43Z",
+    amount: 15000,
+    status: "pending",
+    currency: "USD",
+  },
+  {
+    id: 3,
+    type: "deposit",
+    // merchant: "Merchant 3",
+    date: "2025-07-03T18:22:10Z",
+    amount: 50000,
+    status: "success",
+    currency: "USD",
+  },
+  {
+    id: 4,
+    type: "transfer",
+    date: "2025-07-02T22:45:00Z",
+    amount: 10000,
+    status: "failed",
+    currency: "USD",
+  },
+  {
+    id: 5,
+    type: "payment",
+    merchant: "FOGEC",
+    date: "2025-07-01T11:05:20Z",
+    amount: 32000,
+    status: "success",
+    currency: "USD",
+  },
+  {
+    id: 6,
+    type: "payment",
+    merchant: "FOGEC",
+    date: "2025-07-01T11:05:20Z",
+    amount: 32000,
+    status: "success",
+    currency: "USD",
+  },
+  {
+    id: 7,
+    type: "payment",
+    merchant: "FOGEC",
+    date: "2025-07-01T11:05:20Z",
+    amount: 32000,
+    status: "success",
+    currency: "USD",
+  },
+  {
+    id: 8,
+    type: "payment",
+    merchant: "FOGEC",
+    date: "2025-07-01T11:05:20Z",
+    amount: 32000,
+    status: "success",
+    currency: "USD",
+  },
+  {
+    id: 9,
+    type: "payment",
+    merchant: "FOGEC",
+    date: "2025-07-01T11:05:20Z",
+    amount: 32000,
+    status: "success",
+    currency: "USD",
+  },
+];
 
-export default function LoginScreen() {
-  const [modalVisible, setModalVisible] = useState(false);
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [showPassword, setShowPassword] = useState(false);
+const options = [
+  { label: "Tout", value: "all" },
+  { label: "Payement", value: "payment" },
+  { label: "Retrait", value: "withdrawal" },
+  { label: "Depot", value: "deposit" },
+  { label: "Transfert", value: "transfer" },
+];
 
-  const toggleModal = () => {
-    setModalVisible(!modalVisible);
-  };
-
+export default function WalletScreen() {
   return (
-    <ImageBackground
-      source={background}
-      style={styles.background}
-      resizeMode="cover"
-    >
-      <StatusBar />
-      <View style={styles.card}>
-        <Greet name="Junior" />
-        <Pressable onPress={toggleModal}>
-          <Image source={logoImage} style={styles.logoImage} />
-        </Pressable>
-        <Button title="Go to Home" onPress={toggleModal} color="#FF8A00" />
-        <Button
-          title="Show Alert"
-          onPress={() =>
-            Alert.alert("Alert", "This is an alert", [
-              {
-                text: "Cancel",
-                onPress: () => console.log("Cancel Pressed"),
-                style: "cancel",
-              },
-              {
-                text: "OK",
-                onPress: () => console.log("OK Pressed"),
-              },
-            ])
-          }
-          color="#008A07"
-        />
-        <ActivityIndicator size="large" color="#FF8A00" animating={false} />
+    <View className="w-full relative mt-24">
+      <View className="w-full flex-row items-center justify-between absolute px-6 z-10 bg-background">
+        <ProfileSheet />
+        {/* <Logo variant="default" size="small" /> */}
+        <Text className="text-foreground dark:text-white text-2xl">
+          Factures
+        </Text>
+        <NotificationsModal />
       </View>
-      <Modal
-        visible={modalVisible}
-        animationType="slide"
-        onRequestClose={toggleModal}
-        presentationStyle="pageSheet"
-      >
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <Text>Modal</Text>
-          <Image source={logoImage} style={styles.logoImage} />
-          <Button title="Close Modal" onPress={toggleModal} color="#FF8A00" />
+      <ScrollView className="w-full px-6 mt-20 mb-32">
+        <View className="w-full">
+          <View className="flex-1 flex-row items-center justify-between mb-4 gap-4">
+            <SelectInput
+              className="flex-1 rounded-2xl"
+              placeholder="Tout"
+              options={options}
+            />
+            <PressableIcon
+              onPress={() => {}}
+              name="Search"
+              color="gray"
+              iconSize={20}
+            />
+            <PressableIcon
+              onPress={() => {}}
+              name="SlidersHorizontal"
+              color="gray"
+              iconSize={20}
+            />
+          </View>
+          <Divider />
+          <View className="w-full flex-col gap-2 mt-4">
+            {Transactions.map((transaction) => (
+              <TransactionCard key={transaction.id} transaction={transaction} />
+            ))}
+          </View>
         </View>
-      </Modal>
-    </ImageBackground>
+      </ScrollView>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  logoImage: {
-    width: 100,
-    height: 100,
-  },
-  logoContainer: {
-    marginTop: 60,
-    marginBottom: 20,
-    alignItems: "center",
-  },
-  logoText: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 20,
-    letterSpacing: 1,
-    marginBottom: 20,
-  },
-  card: {
-    backgroundColor: "#fff",
-    borderRadius: 16,
-    paddingVertical: 32,
-    paddingHorizontal: 24,
-    width: "90%",
-    maxWidth: 370,
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: "bold",
-    color: "#181D28",
-    textAlign: "center",
-    marginBottom: 8,
-  },
-  rowCenter: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  subText: {
-    color: "#8C8C8C",
-    fontSize: 14,
-  },
-  link: {
-    color: "#FF8A00",
-    fontWeight: "600",
-    fontSize: 14,
-  },
-  label: {
-    fontSize: 14,
-    color: "#181D28",
-    marginBottom: 6,
-    marginTop: 12,
-    fontWeight: "500",
-  },
-  input: {
-    backgroundColor: "#F6F6F6",
-    borderRadius: 8,
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    fontSize: 15,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: "#ECECEC",
-  },
-  passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#F6F6F6",
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#ECECEC",
-    marginBottom: 8,
-  },
-  eyeIcon: {
-    paddingHorizontal: 10,
-  },
-  forgotContainer: {
-    alignSelf: "flex-end",
-    marginBottom: 16,
-  },
-  forgotText: {
-    color: "#FF8A00",
-    fontSize: 13,
-    fontWeight: "500",
-  },
-  button: {
-    backgroundColor: "#FF8A00",
-    borderRadius: 12,
-    paddingVertical: 14,
-    alignItems: "center",
-    marginTop: 10,
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-});

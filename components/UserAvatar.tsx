@@ -5,9 +5,13 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar";
 
-export default function UserAvatar() {
+export default function UserAvatar({
+  size,
+}: {
+  size: "xl" | "lg" | "md" | "sm" | "xs";
+}) {
   return (
-    <Avatar size="xl">
+    <Avatar size={size}>
       <AvatarFallbackText>Junior Asosa</AvatarFallbackText>
       <AvatarImage
         source={{

@@ -1,7 +1,7 @@
 import ProfileSheet from "@/components/home/ProfileSheet";
+import NotificationsModal from "@/components/notifications/NotificationsModal";
 import { Divider } from "@/components/ui/divider";
 import Icon from "@/components/ui/Icon";
-import PressableIcon from "@/components/ui/PressableIcon";
 import CreditCard from "@/components/Wallets/CreditCard";
 import TransactionCard from "@/components/Wallets/TransactionCard";
 import { ColorValue, ScrollView, Text, View } from "react-native";
@@ -93,7 +93,7 @@ export default function WalletScreen() {
         <Text className="text-foreground dark:text-white text-2xl">
           Wallets
         </Text>
-        <PressableIcon onPress={() => {}} name="Bell" color="#4A67FF" />
+        <NotificationsModal />
       </View>
       <ScrollView className="w-full px-6 mt-20 mb-32">
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>

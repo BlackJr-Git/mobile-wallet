@@ -7,12 +7,14 @@ interface PressableIconProps {
   onPress: () => void;
   name: keyof typeof icons;
   color?: string;
+  iconSize?: number;
 }
 
 export default function PressableIcon({
   onPress,
   name,
   color,
+  iconSize = 28,
 }: PressableIconProps) {
   return (
     <View>
@@ -20,7 +22,7 @@ export default function PressableIcon({
         onPress={onPress}
         className="w-12 h-12 rounded-2xl p-6 flex border-2 border-indigo-100 dark:border-indigo-800 items-center justify-center"
       >
-        <Icon name={name} size={32} color={color} />
+        <Icon name={name} size={iconSize} color={color} />
       </Pressable>
     </View>
   );

@@ -2,9 +2,9 @@ import { Image, ScrollView, Text, View } from "react-native";
 // import { ThemedText } from '@/components/ThemedText';
 import Greet from "@/components/Greet";
 import ProfileSheet from "@/components/home/ProfileSheet";
+import NotificationsModal from "@/components/notifications/NotificationsModal";
 import Icon from "@/components/ui/Icon";
 import Logo from "@/components/ui/Logo";
-import PressableIcon from "@/components/ui/PressableIcon";
 import { icons } from "lucide-react-native";
 
 const promo1Img = require("../../assets/images/promo-1.png");
@@ -64,7 +64,7 @@ export default function HomeScreen() {
       <View className="w-full flex-row items-center justify-between absolute px-6 z-10 bg-background">
         <ProfileSheet />
         <Logo variant="default" size="small" />
-        <PressableIcon onPress={() => {}} name="Bell" color="#4A67FF" />
+        <NotificationsModal />
       </View>
       <ScrollView className="w-full px-6 mt-20">
         <View className="w-full">

@@ -65,7 +65,7 @@ export default function ProfileSheet() {
         <DrawerBackdrop />
         <DrawerContent>
           <DrawerHeader className="mt-24">
-            <UserAvatar />
+            <UserAvatar size="xl" />
           </DrawerHeader>
 
           <DrawerBody>

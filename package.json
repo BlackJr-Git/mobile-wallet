@@ -13,6 +13,7 @@
   "dependencies": {
     "@expo/html-elements": "^0.4.2",
     "@expo/vector-icons": "^14.1.0",
+    "@gluestack-ui/actionsheet": "^0.2.53",
     "@gluestack-ui/avatar": "^0.1.18",
     "@gluestack-ui/button": "^1.0.14",
     "@gluestack-ui/divider": "^0.1.10",
@@ -20,6 +21,7 @@
     "@gluestack-ui/modal": "^0.1.41",
     "@gluestack-ui/nativewind-utils": "^1.0.26",
     "@gluestack-ui/overlay": "^0.1.22",
+    "@gluestack-ui/select": "^0.1.31",
     "@gluestack-ui/toast": "^1.0.9",
     "@legendapp/motion": "^2.4.0",
     "@react-navigation/bottom-tabs": "^7.3.10",
