@@ -1,11 +1,11 @@
-import { Image, ScrollView, Text, View } from "react-native";
-// import { ThemedText } from '@/components/ThemedText';
 import Greet from "@/components/Greet";
 import ProfileSheet from "@/components/home/ProfileSheet";
 import NotificationsModal from "@/components/notifications/NotificationsModal";
 import Icon from "@/components/ui/Icon";
 import Logo from "@/components/ui/Logo";
+import { Link } from "expo-router";
 import { icons } from "lucide-react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 const promo1Img = require("../../assets/images/promo-1.png");
 const promo2Img = require("../../assets/images/promo-2.png");
@@ -14,22 +14,26 @@ type ServiceItemProps = {
   icon: keyof typeof icons;
   title: string;
   iconColor?: string;
+  routeName: string;
 };
 
 const services: ServiceItemProps[] = [
   {
     icon: "Newspaper",
     title: "Factures",
+    routeName: "factures",
     iconColor: "#ff6900",
   },
   {
     icon: "CardSim",
     title: "Achat Credit",
+    routeName: "achat-credit",
     iconColor: "#2b7fff",
   },
   {
     icon: "HandCoins",
     title: "Change",
+    routeName: "change",
     iconColor: "#00c950",
   },
 ];
@@ -104,16 +108,22 @@ export default function HomeScreen() {
             <Text className="text-white mt-2">Historique</Text>
           </View>
         </View>
-        <View className="w-full flex-row my-6">
+        <View className="w-full flex-row justify-between my-6">
           {services.map((service) => (
             <ServiceItem
               key={service.title}
               icon={service.icon}
               iconColor={service.iconColor}
               title={service.title}
+              routeName={service.routeName}
             />
           ))}
-          <ServiceItem icon="Grid2x2Plus" iconColor="#4A67FF" title="Plus" />
+          <ServiceItem
+            icon="Grid2x2Plus"
+            iconColor="#4A67FF"
+            title="Plus"
+            routeName="plus"
+          />
         </View>
 
         <View className="w-full">
@@ -141,14 +151,16 @@ export default function HomeScreen() {
   );
 }
 
-function ServiceItem({ icon, title, iconColor }: ServiceItemProps) {
+function ServiceItem({ icon, title, iconColor, routeName }: ServiceItemProps) {
   return (
-    <View className="flex-1 items-center justify-between">
-      <View className="items-center bg-gray-200 dark:bg-gray-800 p-6 rounded-3xl">
-        <Icon name={icon} size={28} color={iconColor} />
+    <Link href={`/achat-credit`}>
+      <View className="flex-1 items-center justify-between">
+        <View className="items-center bg-gray-200 dark:bg-gray-800 p-6 rounded-3xl">
+          <Icon name={icon} size={28} color={iconColor} />
+        </View>
+        <Text className="text-slate-500 mt-2 dark:text-white">{title}</Text>
       </View>
-      <Text className="text-slate-500 mt-2 dark:text-white">{title}</Text>
-    </View>
+    </Link>
   );
 }
 
@@ -169,29 +181,13 @@ function PromotionItem({ title, description, image }: PromotionItemProps) {
   );
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     alignItems: "center",
-//     // justifyContent: "center",
-//     paddingVertical: 64,
-//     paddingHorizontal: 24,
-//     position: "relative",
-//     backgroundColor: "#fff",
-//     paddingTop: 152,
-//   },
-//   header: {
-//     position: "absolute",
-//     zIndex: 10,
-//     top: 48,
-//     flexDirection: "row",
-//     alignItems: "center",
-//     gap: 8,
-//     justifyContent: "space-between",
-//     width: "100%",
-//     // paddingHorizontal: 24,
-//     paddingTop: 24,
-//     backgroundColor: "#fff",
-//     marginBottom: "auto",
-//   },
-// });
+const styles = StyleSheet.create({
+  link: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    // backgroundColor: "#fff",
+  },
+});
