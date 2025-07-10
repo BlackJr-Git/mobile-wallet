@@ -38,7 +38,7 @@ export default function ScanScreen() {
     // Camera permissions are still loading.
     return (
       <View style={styles.container}>
-        <Text style={styles.message}>
+        <Text className="dark:text-white">
           Nous avons besoin de votre permission pour afficher la camera
         </Text>
         <Button onPress={requestPermission} title="autoriser" />
@@ -50,7 +50,7 @@ export default function ScanScreen() {
     // Camera permissions are not granted yet.
     return (
       <View style={styles.container}>
-        <Text style={styles.message}>
+        <Text className="dark:text-white">
           Nous avons besoin de votre permission pour afficher la camera
         </Text>
         <Button onPress={requestPermission} title="autoriser" />
@@ -64,9 +64,9 @@ export default function ScanScreen() {
 
   function handleBarcodeScanned({ data }: { data: string }) {
     if (validQrCode.includes(data)) {
-      console.log("QR code valid");
+      console.log("QR code valid", data);
     } else {
-      console.log("QR code invalid");
+      console.log("QR code invalid", data);
     }
     setScanned(true);
   }

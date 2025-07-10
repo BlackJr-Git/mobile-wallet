@@ -6,6 +6,7 @@ import Logo from "@/components/ui/Logo";
 import { Link } from "expo-router";
 import { icons } from "lucide-react-native";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const promo1Img = require("../../assets/images/promo-1.png");
 const promo2Img = require("../../assets/images/promo-2.png");
@@ -64,13 +65,14 @@ const promotions: PromotionItemProps[] = [
 
 export default function HomeScreen() {
   return (
-    <View className="w-full relative mt-24">
-      <View className="w-full flex-row items-center justify-between absolute px-6 z-10 bg-background">
+    <SafeAreaView className="w-full relative">
+    <View className="w-full relative mt-8">
+      <View className="w-full flex-row items-center justify-between px-6 pb-4 mb-4 z-10 bg-background">
         <ProfileSheet />
         <Logo variant="default" size="small" />
         <NotificationsModal />
       </View>
-      <ScrollView className="w-full px-6 mt-20">
+      <ScrollView className="w-full px-6 mt-4">
         <View className="w-full">
           <Greet name="Junior" />
           <Text className="text-foreground dark:text-white">
@@ -148,6 +150,7 @@ export default function HomeScreen() {
         </ScrollView>
       </ScrollView>
     </View>
+    </SafeAreaView>
   );
 }
 

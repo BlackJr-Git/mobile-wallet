@@ -62,8 +62,8 @@ export default function TabLayout() {
         options={{
           title: "Scan",
           tabBarIcon: ({ color }) => (
-            <View className="w-full h-full items-center justify-center p-4 mb-8">
-              <Icon name="Scan" size={48} color={color} />
+            <View className="w-16 h-16 items-center justify-center p-4 bg-indigo-500 rounded-full mb-12">
+              <Icon name="Scan" size={32} color={"white"} />
             </View>
           ),
         }}
