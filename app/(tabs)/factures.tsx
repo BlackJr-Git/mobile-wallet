@@ -5,6 +5,7 @@ import PressableIcon from "@/components/ui/PressableIcon";
 import SelectInput from "@/components/ui/SelectInput";
 import TransactionCard from "@/components/Wallets/TransactionCard";
 import { ScrollView, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Transactions = [
   {
@@ -99,44 +100,49 @@ const options = [
 
 export default function WalletScreen() {
   return (
-    <View className="w-full relative mt-24">
-      <View className="w-full flex-row items-center justify-between absolute px-6 z-10 bg-background">
-        <ProfileSheet />
-        {/* <Logo variant="default" size="small" /> */}
-        <Text className="text-foreground dark:text-white text-2xl">
-          Factures
-        </Text>
-        <NotificationsModal />
-      </View>
-      <ScrollView className="w-full px-6 mt-20 mb-32">
-        <View className="w-full">
-          <View className="flex-1 flex-row items-center justify-between mb-4 gap-4">
-            <SelectInput
-              className="flex-1 rounded-2xl"
-              placeholder="Tout"
-              options={options}
-            />
-            <PressableIcon
-              onPress={() => {}}
-              name="Search"
-              color="gray"
-              iconSize={20}
-            />
-            <PressableIcon
-              onPress={() => {}}
-              name="SlidersHorizontal"
-              color="gray"
-              iconSize={20}
-            />
-          </View>
-          <Divider />
-          <View className="w-full flex-col gap-2 mt-4">
-            {Transactions.map((transaction) => (
-              <TransactionCard key={transaction.id} transaction={transaction} />
-            ))}
-          </View>
+    <SafeAreaView>
+      <View className="w-full relative">
+        <View className="w-full flex-row items-center justify-between absolute px-6 z-10 bg-background">
+          <ProfileSheet />
+          {/* <Logo variant="default" size="small" /> */}
+          <Text className="text-foreground dark:text-white text-2xl">
+            Factures
+          </Text>
+          <NotificationsModal />
         </View>
-      </ScrollView>
-    </View>
+        <ScrollView className="w-full px-6 mt-20 mb-32">
+          <View className="w-full">
+            <View className="flex-1 flex-row items-center justify-between mb-4 gap-4">
+              <SelectInput
+                className="flex-1 rounded-2xl"
+                placeholder="Tout"
+                options={options}
+              />
+              <PressableIcon
+                onPress={() => {}}
+                name="Search"
+                color="gray"
+                iconSize={20}
+              />
+              <PressableIcon
+                onPress={() => {}}
+                name="SlidersHorizontal"
+                color="gray"
+                iconSize={20}
+              />
+            </View>
+            <Divider />
+            <View className="w-full flex-col gap-2 mt-4">
+              {Transactions.map((transaction) => (
+                <TransactionCard
+                  key={transaction.id}
+                  transaction={transaction}
+                />
+              ))}
+            </View>
+          </View>
+        </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 }
