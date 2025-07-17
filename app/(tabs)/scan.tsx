@@ -2,14 +2,16 @@ import ProfileSheet from "@/components/home/ProfileSheet";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import PressableIcon from "@/components/ui/PressableIcon";
-import { CameraType, CameraView, useCameraPermissions } from "expo-camera";
+import useKeyboardStatus from "@/hooks/useKeyboardStatus";
+import { CameraView, useCameraPermissions } from "expo-camera";
 import React, { useEffect, useState } from "react";
 import {
+  KeyboardAvoidingView,
+  Platform,
   // Button,
-  StatusBar,
+  // StatusBar,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
 
@@ -22,9 +24,10 @@ const validQrCode = [
 ];
 
 export default function ScanScreen() {
-  const [facing, setFacing] = useState<CameraType>("back");
+  // const [facing, setFacing] = useState<CameraType>("back");
   const [permission, requestPermission] = useCameraPermissions();
   const [scanned, setScanned] = useState(false);
+  const keyboardOpen = useKeyboardStatus();
 
   useEffect(() => {
     if (scanned) {
@@ -58,9 +61,9 @@ export default function ScanScreen() {
     );
   }
 
-  function toggleCameraFacing() {
-    setFacing((current) => (current === "back" ? "front" : "back"));
-  }
+  // function toggleCameraFacing() {
+  //   setFacing((current) => (current === "back" ? "front" : "back"));
+  // }
 
   function handleBarcodeScanned({ data }: { data: string }) {
     if (validQrCode.includes(data)) {
@@ -72,8 +75,12 @@ export default function ScanScreen() {
   }
 
   return (
-    <View className="flex-1 relative">
-      <StatusBar barStyle="dark-content" />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      // keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+      className="flex-1 relative"
+    >
+      {/* <StatusBar barStyle="dark-content" /> */}
       {/* Header with absolute positioning */}
       <View style={styles.header} className="bg-background-0">
         <ProfileSheet />
@@ -94,22 +101,25 @@ export default function ScanScreen() {
           }}
           onBarcodeScanned={handleBarcodeScanned}
           style={styles.camera}
-          facing={facing}
+          facing={"back"}
         />
-        <View style={stylesQr.lens}>
-          {/* 4 coins */}
-          <View style={[stylesQr.corner, stylesQr.topLeft]} />
-          <View style={[stylesQr.corner, stylesQr.topRight]} />
-          <View style={[stylesQr.corner, stylesQr.bottomLeft]} />
-          <View style={[stylesQr.corner, stylesQr.bottomRight]} />
-        </View>
+
+        {!keyboardOpen && (
+          <View style={stylesQr.lens}>
+            {/* 4 coins */}
+            <View style={[stylesQr.corner, stylesQr.topLeft]} />
+            <View style={[stylesQr.corner, stylesQr.topRight]} />
+            <View style={[stylesQr.corner, stylesQr.bottomLeft]} />
+            <View style={[stylesQr.corner, stylesQr.bottomRight]} />
+          </View>
+        )}
 
         {/* Overlay buttons with absolute positioning */}
-        <View style={styles.buttonContainer}>
+        {/* <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
             <Text style={styles.text}>Flip Camera</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View className="absolute bottom-24 bg-transparent mx-auto px-4 py-8 w-full">
           <View className="w-full bg-background-0 rounded-2xl p-4">
             <Text className="text-center text-xl dark:text-white">
@@ -126,7 +136,7 @@ export default function ScanScreen() {
           <Text style={styles.scanSuccessText}>QR Code détecté !</Text>
         </View>
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

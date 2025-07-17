@@ -156,7 +156,7 @@ export default function HomeScreen() {
 
 function ServiceItem({ icon, title, iconColor, routeName }: ServiceItemProps) {
   return (
-    <Link href={`/${routeName}`}>
+    <Link href={`/${routeName}` as any}>
       <View className="flex-1 items-center justify-between">
         <View className="items-center bg-gray-200 dark:bg-gray-800 p-6 rounded-3xl">
           <Icon name={icon} size={28} color={iconColor} />

@@ -15,6 +15,8 @@ export default function TabLayout() {
         headerShown: false,
         // tabBarButton: HapticTab,
         // tabBarBackground: TabBarBackground,
+        tabBarActiveTintColor: "#615fff", // Couleur de l’icône active
+        tabBarInactiveTintColor: "#B0B0B0", // Couleur de l’icône inactive
         tabBarStyle: Platform.select({
           ios: {
             // Use a transparent background on iOS to show the blur effect

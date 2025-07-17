@@ -97,7 +97,7 @@ export default function WalletScreen() {
           </Text>
           <NotificationsModal />
         </View>
-        <ScrollView className="w-full px-6 mt-20 mb-32">
+        <ScrollView className="w-full px-6 mt-20 pb-64">
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View className="flex-row gap-1 mt-4">
               {creditCards.map((creditCard) => (
