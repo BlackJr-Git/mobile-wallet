@@ -1,7 +1,15 @@
+import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
+import { Link, router } from "expo-router";
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Pressable } from "react-native";
-import { LinearGradient } from 'expo-linear-gradient';
-import { Ionicons } from '@expo/vector-icons';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -9,7 +17,10 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <LinearGradient colors={["#5B6BFE", "#5B6BFE", "#6A5BFE", "#49A7F6"]} style={styles.background}>
+    <LinearGradient
+      colors={["#5B6BFE", "#5B6BFE", "#6A5BFE", "#49A7F6"]}
+      style={styles.background}
+    >
       <View style={styles.logoContainer}>
         {/* Logo ou nom de l'app */}
         <Text style={styles.logoText}>F-Pay</Text>
@@ -18,9 +29,9 @@ export default function LoginScreen() {
         <Text style={styles.title}>Connexion</Text>
         <View style={styles.rowCenter}>
           <Text style={styles.subText}>Vous n&apos;avez pas de compte ? </Text>
-          <TouchableOpacity>
+          <Link href="/sign-in">
             <Text style={styles.link}>S&apos;inscrire</Text>
-          </TouchableOpacity>
+          </Link>
         </View>
         {/* Email */}
         <Text style={styles.label}>Email</Text>
@@ -43,7 +54,10 @@ export default function LoginScreen() {
             secureTextEntry={!showPassword}
             autoCapitalize="none"
           />
-          <Pressable onPress={() => setShowPassword(!showPassword)} style={styles.eyeIcon}>
+          <Pressable
+            onPress={() => setShowPassword(!showPassword)}
+            style={styles.eyeIcon}
+          >
             <Ionicons
               name={showPassword ? "eye" : "eye-off"}
               size={22}
@@ -54,7 +68,10 @@ export default function LoginScreen() {
         <TouchableOpacity style={styles.forgotContainer}>
           <Text style={styles.forgotText}>Mot de passe oublié ?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          onPress={() => router.replace("/(tabs)")}
+          style={styles.button}
+        >
           <Text style={styles.buttonText}>Se connecter</Text>
         </TouchableOpacity>
       </View>

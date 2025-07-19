@@ -2,6 +2,7 @@
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 import Input from "@/components/ui/Input";
+import { router, useNavigation } from "expo-router";
 import {
   ImageBackground,
   Pressable,
@@ -12,6 +13,7 @@ import {
 const background = require("../../assets/images/bg-main.png");
 
 export default function LoginScreen() {
+  const navigation = useNavigation();
   // const [modalVisible, setModalVisible] = useState(false);
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
@@ -26,7 +28,12 @@ export default function LoginScreen() {
       {/* <Logo variant="white" size="medium" /> */}
       <View style={styles.card}>
         <View>
-          <Pressable onPress={() => {}} style={styles.backButton}>
+          <Pressable
+            onPress={() => {
+              navigation.goBack();
+            }}
+            style={styles.backButton}
+          >
             <Icon name="ChevronLeft" size={32} color="#979797" />
           </Pressable>
         </View>
@@ -46,15 +53,19 @@ export default function LoginScreen() {
         </View>
         <View style={styles.rowLeft}>
           <Text style={styles.subText}>Vous n&apos;avez pas de compte ?</Text>
-          <Text style={{ marginLeft: 6, color: "#4A67FF", fontWeight: "bold" }}>
-            Se connecter
-          </Text>
+          <Pressable onPress={() => router.replace("/login")}>
+            <Text
+              style={{ marginLeft: 6, color: "#4A67FF", fontWeight: "bold" }}
+            >
+              Se connecter
+            </Text>
+          </Pressable>
         </View>
       </View>
     </ImageBackground>
   );
 }
- 
+
 const styles = StyleSheet.create({
   background: {
     flex: 1,
