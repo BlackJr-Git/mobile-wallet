@@ -1,9 +1,10 @@
 import Greet from "@/components/Greet";
 import ProfileSheet from "@/components/home/ProfileSheet";
 import NotificationsModal from "@/components/notifications/NotificationsModal";
+import ServiceItem from "@/components/services/ServiceItem";
+import ServiceModal from "@/components/services/ServiceModal";
 import Icon from "@/components/ui/Icon";
 import Logo from "@/components/ui/Logo";
-import { Link } from "expo-router";
 import { icons } from "lucide-react-native";
 import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -120,12 +121,7 @@ export default function HomeScreen() {
                 routeName={service.routeName}
               />
             ))}
-            <ServiceItem
-              icon="Grid2x2Plus"
-              iconColor="#4A67FF"
-              title="Plus"
-              routeName="plus"
-            />
+            <ServiceModal />
           </View>
 
           <View className="w-full">
@@ -154,18 +150,18 @@ export default function HomeScreen() {
   );
 }
 
-function ServiceItem({ icon, title, iconColor, routeName }: ServiceItemProps) {
-  return (
-    <Link href={`/${routeName}` as any}>
-      <View className="flex-1 items-center justify-between">
-        <View className="items-center bg-gray-200 dark:bg-gray-800 p-6 rounded-3xl">
-          <Icon name={icon} size={28} color={iconColor} />
-        </View>
-        <Text className="text-slate-500 mt-2 dark:text-white">{title}</Text>
-      </View>
-    </Link>
-  );
-}
+// function ServiceItem({ icon, title, iconColor, routeName }: ServiceItemProps) {
+//   return (
+//     <Link href={`/${routeName}` as any}>
+//       <View className="flex-1 items-center justify-between">
+//         <View className="items-center bg-gray-200 dark:bg-gray-800 p-6 rounded-3xl">
+//           <Icon name={icon} size={28} color={iconColor} />
+//         </View>
+//         <Text className="text-slate-500 mt-2 dark:text-white">{title}</Text>
+//       </View>
+//     </Link>
+//   );
+// }
 
 const images: { [key: string]: any } = {
   "promo-1": promo1Img,

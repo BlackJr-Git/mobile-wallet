@@ -31,14 +31,32 @@ export default function TabLayout() {
             justifyContent: "center",
           },
           // default: {},
+          android: {
+            position: "absolute",
+            flex: 1,
+            bottom: 16,
+            marginHorizontal: 12,
+            borderRadius: 32,
+            alignItems: "center",
+            justifyContent: "center",
+          },
         }),
-        tabBarItemStyle: {
-          flex: 1,
-          marginVertical: 16,
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
-        },
+        tabBarItemStyle: Platform.select({
+          ios: {
+            flex: 1,
+            marginVertical: 16,
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+          },
+          android: {
+            flex: 1,
+            marginVertical: 8,
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+          },
+        }),
       }}
     >
       <Tabs.Screen

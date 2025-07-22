@@ -3,14 +3,18 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 
 interface Props {
   placeholder: string;
-  label: string;
+  label?: string;
 }
 
 export default function Input({ placeholder, label }: Props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput style={styles.input} placeholder={placeholder} placeholderTextColor="#9ca3af" />
+      {label && <Text style={styles.label}>{label}</Text>}
+      <TextInput
+        style={styles.input}
+        placeholder={placeholder}
+        placeholderTextColor="#9ca3af"
+      />
     </View>
   );
 }
