@@ -25,7 +25,7 @@ const creditCards: CreditCardItemProps[] = [
     currency: "USD",
     userName: "Junior Asosa",
     image: "promo-1",
-    colors: ["#a855f7", "#6366f1"] as const,
+    colors: ["#6366f1", "#a855f7"] as const,
   },
   {
     id: 2,
@@ -97,8 +97,15 @@ export default function WalletScreen() {
           </Text>
           <NotificationsModal />
         </View>
-        <ScrollView className="w-full px-6 mt-20 pb-64">
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <ScrollView
+          className="w-full mt-20 pb-64"
+          showsVerticalScrollIndicator={false}
+        >
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            className="pl-6"
+          >
             <View className="flex-row gap-1 mt-4">
               {creditCards.map((creditCard) => (
                 <CreditCard
@@ -114,18 +121,26 @@ export default function WalletScreen() {
               ))}
             </View>
           </ScrollView>
-          <View className="w-full flex-row border border-indigo-500 bg-indigo-500 rounded-2xl p-4 mt-4">
-            <View className="flex-1 items-center justify-between">
-              <Icon name="ArrowRightLeft" size={32} color="#fff" />
-              <Text className="text-white mt-2">Transférer</Text>
+          <View className="w-full flex-row items-center justify-center my-4 gap-2">
+            <View className="w-16 h-2 bg-indigo-500 rounded-full items-center justify-center">
             </View>
-            <View className="bg-indigo-200 w-[1px] h-full"></View>
-            <View className="flex-1 items-center justify-between">
-              <Icon name="BanknoteArrowUp" size={32} color="#fff" />
-              <Text className="text-white mt-2">Approvisionner</Text>
+            <View className="w-2 h-2 bg-indigo-500 rounded-full items-center justify-center">
             </View>
           </View>
-          <View className="w-full border border-indigo-50 dark:border-indigo-800 rounded-2xl p-4 mt-4">
+          <View className="w-full px-6">
+            <View className="w-full flex-row border border-indigo-500 bg-indigo-500 rounded-2xl p-4 mt-4">
+              <View className="flex-1 items-center justify-between">
+                <Icon name="ArrowRightLeft" size={32} color="#fff" />
+                <Text className="text-white mt-2">Transférer</Text>
+              </View>
+              <View className="bg-indigo-200 w-[1px] h-full"></View>
+              <View className="flex-1 items-center justify-between">
+                <Icon name="BanknoteArrowUp" size={32} color="#fff" />
+                <Text className="text-white mt-2">Approvisionner</Text>
+              </View>
+            </View>
+          </View>
+          <View className="w-full border border-indigo-50 dark:border-indigo-800 px-6 rounded-2xl p-4 mt-4">
             <View className="flex-1 flex-row items-center justify-between mb-4">
               <Text className="dark:text-white mt-2">
                 Transactions recentes

@@ -25,8 +25,8 @@ export default function CreditCardItem({
   return (
     <LinearGradient
       colors={colors}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
+      end={{ x: 0, y: 0 }}
+      start={{ x: 1, y: 1 }}
       style={{
         alignItems: "center",
         justifyContent: "space-between",
@@ -38,7 +38,7 @@ export default function CreditCardItem({
       }}
     >
       <View className="flex-row items-center justify-between w-full">
-        <Logo variant="default" size="small" withText />
+        <Logo variant="default" size="small" />
         {/* <Image source={simImg} className="w-12 h-12" /> */}
         <SimImg className="w-24 h-24" />
       </View>
