@@ -9,6 +9,7 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
+import {Platform} from "react-native"
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 
@@ -25,7 +26,11 @@ export default function RootLayout() {
 
   return (
     <GluestackUIProvider
-      mode={colorScheme === "dark" ? DarkTheme : (DefaultTheme as any)}
+      mode={Platform.OS === 'android'
+        ? DefaultTheme
+        : colorScheme === 'dark'
+          ? DarkTheme
+          : (DefaultTheme as any)}
     >
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack initialRouteName="(tabs)">
