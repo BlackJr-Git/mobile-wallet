@@ -2,10 +2,12 @@ import Greet from "@/components/Greet";
 import ProfileSheet from "@/components/home/ProfileSheet";
 import NotificationsModal from "@/components/notifications/NotificationsModal";
 import ServiceItem from "@/components/services/ServiceItem";
-import ServiceModal from "@/components/services/ServiceModal";
+import ServiceModal, { ServiceModalRef, OpenServiceItem } from "@/components/services/ServiceModal";
 import Icon from "@/components/ui/Icon";
 import Logo from "@/components/ui/Logo";
+
 import { icons } from "lucide-react-native";
+import { useCallback, useRef } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -65,6 +67,11 @@ const promotions: PromotionItemProps[] = [
 ];
 
 export default function HomeScreen() {
+  const serviceModalRef = useRef<ServiceModalRef>(null);
+  
+  const openSheet = useCallback(() => {
+    serviceModalRef.current?.expand();
+  }, []);
   return (
     <SafeAreaView className="w-full relative">
       <View className="w-full relative">
@@ -121,7 +128,13 @@ export default function HomeScreen() {
                 routeName={service.routeName}
               />
             ))}
-            <ServiceModal />
+
+            <OpenServiceItem
+              icon="Grid2x2Plus"
+              iconColor="#4A67FF"
+              title="Plus"
+              onPress={openSheet}
+            />
           </View>
 
           <View className="w-full">
@@ -146,6 +159,7 @@ export default function HomeScreen() {
           </ScrollView>
         </ScrollView>
       </View>
+      <ServiceModal ref={serviceModalRef} />
     </SafeAreaView>
   );
 }

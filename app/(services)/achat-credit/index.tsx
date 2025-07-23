@@ -66,7 +66,7 @@ export default function AchatCredit() {
             </Text>
           </View>
           <Input
-            maxLength={10}
+            // maxLength={10}
             keyboardType="numeric"
             placeholder="0851750853"
             // label="Numéro de téléphone"

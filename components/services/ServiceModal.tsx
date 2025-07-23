@@ -1,9 +1,15 @@
 import Icon from "@/components/ui/Icon";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { icons } from "lucide-react-native";
-import React, { useState } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import Modal from "react-native-modal";
 import ServiceItem from "./ServiceItem";
 
 type ServiceItemProps = {
@@ -64,44 +70,56 @@ const services: ServiceItemProps[] = [
   },
 ];
 
-function ServiceModal() {
-  const [isModalVisible, setModalVisible] = useState(false);
-  const colorScheme = useColorScheme();
+export interface ServiceModalRef {
+  expand: () => void;
+  close: () => void;
+}
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
+const ServiceModal = forwardRef<ServiceModalRef>((props, ref) => {
+  const colorScheme = useColorScheme();
+  const sheetRef = useRef<BottomSheet>(null);
+
+  const snapPoints = useMemo(() => ["50%", "90%"], []);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      expand: () => {
+        sheetRef.current?.snapToIndex(1);
+      },
+      close: () => {
+        sheetRef.current?.close();
+      },
+    }),
+    []
+  );
+
+  const closeSheet = useCallback(() => {
+    sheetRef.current?.close();
+  }, []);
+
+  const handleSheetChanges = useCallback((index: number) => {
+    // Handle sheet changes if needed
+  }, []);
 
   return (
-    <View>
-      <OpenServiceItem
-        icon="Grid2x2Plus"
-        iconColor="#4A67FF"
-        title="Plus"
-        onPress={toggleModal}
-      />
-
-      <Modal
-        isVisible={isModalVisible}
-        onBackdropPress={toggleModal}
-        animationIn="slideInUp"
-        // animationOut="slideOutDown"
-        swipeDirection="down"
-        backdropOpacity={0.8}
-        style={styles.modalBottom}
-        // onSwipeComplete={toggleModal}
-        animationOutTiming={1000}
-        useNativeDriver={true}
+    <View style={styles.mondalContainer}>
+      <BottomSheet
+        ref={sheetRef}
+        index={-1} // fermé par défaut
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}
+        enablePanDownToClose
+        backgroundStyle={{
+          backgroundColor: colorScheme === "dark" ? "#1e1e1e" : "#fff",
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+        }}
       >
-        <View
-          style={[
-            styles.modalContent,
-            { backgroundColor: colorScheme === "dark" ? "#1e1e1e" : "#fff" },
-          ]}
-        >
+        <BottomSheetView className="p-6">
           <View className="flex-row items-center justify-between">
             <Text className="text-2xl font-bold dark:text-white">Services</Text>
-            <Pressable onPress={toggleModal}>
+            <Pressable onPress={closeSheet}>
               <Icon
                 name="X"
                 size={28}
@@ -109,6 +127,7 @@ function ServiceModal() {
               />
             </Pressable>
           </View>
+
           <View className="flex-row flex-wrap mt-8">
             {services.map((service) => (
               <View
@@ -124,29 +143,31 @@ function ServiceModal() {
               </View>
             ))}
           </View>
-        </View>
-      </Modal>
+        </BottomSheetView>
+      </BottomSheet>
     </View>
   );
-}
+});
+
+ServiceModal.displayName = "ServiceModal";
 
 export default ServiceModal;
 
-type OpenServiceItemProps = {
+export type OpenServiceItemProps = {
   icon: keyof typeof icons;
   title: string;
   iconColor?: string;
   onPress: () => void;
 };
 
-function OpenServiceItem({
+export function OpenServiceItem({
   icon,
   title,
   iconColor,
   onPress,
 }: OpenServiceItemProps) {
   return (
-    <Pressable onPress={onPress} className="w-full">
+    <Pressable onPress={onPress} className="">
       <View className="flex-1 items-center justify-between">
         <View className="items-center bg-gray-200 dark:bg-gray-800 p-6 rounded-3xl">
           <Icon name={icon} size={28} color={iconColor} />
@@ -158,17 +179,13 @@ function OpenServiceItem({
 }
 
 const styles = StyleSheet.create({
-  modalBottom: {
-    justifyContent: "flex-end", // 👈 colle le modal en bas
-    margin: 0, // ⚠️ important pour qu’il prenne toute la largeur
-    // paddingBottom: 64,
-    // backgroundColor: "red",
-  },
-  modalContent: {
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    padding: 20,
-    minHeight: 200,
-    paddingBottom: 64,
+  mondalContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 1000,
+    pointerEvents: "box-none",
   },
 });
