@@ -73,8 +73,8 @@ export default function HomeScreen() {
     serviceModalRef.current?.expand();
   }, []);
   return (
-    <SafeAreaView className="w-full relative">
-      <View className="w-full relative">
+    <SafeAreaView className="w-full h-full">
+      <View className="w-full">
         <View className="w-full flex-row items-center justify-between px-6 pb-4 mb-4 z-10 bg-background">
           <ProfileSheet />
           <Logo variant="default" size="small" />

@@ -1,8 +1,14 @@
-import React from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TextInputProps,
+  View,
+} from "react-native";
 
-interface Props {
+interface Props extends Omit<TextInputProps, "placeholder"> {
   placeholder: string;
   label?: string;
 }
@@ -10,11 +16,15 @@ interface Props {
 export default function Input({ placeholder, label, ...props }: Props) {
   const colorScheme = useColorScheme();
   return (
-    <View style={styles.container} >
+    <View style={styles.container}>
       {label && <Text style={styles.label}>{label}</Text>}
       <TextInput
         style={styles.input}
-        className={colorScheme === "dark" ? "bg-gray-800 border-gray-700" : "bg-gray-100 border-gray-200"}
+        className={
+          colorScheme === "dark"
+            ? "bg-gray-800 border-gray-700"
+            : "bg-gray-100 border-gray-200"
+        }
         placeholder={placeholder}
         placeholderTextColor="#9ca3af"
         {...props}

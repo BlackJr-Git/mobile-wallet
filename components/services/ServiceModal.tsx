@@ -79,7 +79,7 @@ const ServiceModal = forwardRef<ServiceModalRef>((props, ref) => {
   const colorScheme = useColorScheme();
   const sheetRef = useRef<BottomSheet>(null);
 
-  const snapPoints = useMemo(() => ["50%", "90%"], []);
+  const snapPoints = useMemo(() => ["60%", "90%"], []);
 
   useImperativeHandle(
     ref,
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    zIndex: 1000,
+    zIndex: 9999,
     pointerEvents: "box-none",
   },
 });
