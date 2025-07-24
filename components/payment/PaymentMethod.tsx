@@ -166,8 +166,10 @@ export function OpenPaymentMethodItem({
             className="w-16 h-16 rounded-2xl"
           />
           <View>
-            <Text className="text-lg font-semibold">{title}</Text>
-            <Text className="text-lg text-gray-500">
+            <Text className="text-lg font-semibold dark:text-white">
+              {title}
+            </Text>
+            <Text className="text-lg text-gray-500 dark:text-white">
               {availableAmount} {currency}
             </Text>
           </View>
