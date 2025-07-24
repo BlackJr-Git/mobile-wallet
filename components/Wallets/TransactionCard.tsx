@@ -26,7 +26,7 @@ export default function TransactionItem({
   transaction: TransactionItemProps;
 }) {
   return (
-    <View className="w-full flex-row items-center justify-between mb-1">
+    <View className="w-full flex-row items-center justify-between mb-1 border border-indigo-100 dark:border-indigo-800 px-2 rounded-2xl p-2">
       <View className="w-16 h-16 bg-indigo-200 dark:bg-indigo-900 rounded-2xl items-center justify-center">
         <Icon
           name={

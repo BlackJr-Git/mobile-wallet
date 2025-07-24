@@ -122,10 +122,8 @@ export default function WalletScreen() {
             </View>
           </ScrollView>
           <View className="w-full flex-row items-center justify-center my-4 gap-2">
-            <View className="w-16 h-2 bg-indigo-500 rounded-full items-center justify-center">
-            </View>
-            <View className="w-2 h-2 bg-indigo-500 rounded-full items-center justify-center">
-            </View>
+            <View className="w-16 h-2 bg-indigo-500 rounded-full items-center justify-center"></View>
+            <View className="w-2 h-2 bg-indigo-500 rounded-full items-center justify-center"></View>
           </View>
           <View className="w-full px-6">
             <View className="w-full flex-row border border-indigo-500 bg-indigo-500 rounded-2xl p-4 mt-4">
@@ -140,7 +138,7 @@ export default function WalletScreen() {
               </View>
             </View>
           </View>
-          <View className="w-full border border-indigo-50 dark:border-indigo-800 px-6 rounded-2xl p-4 mt-4">
+          <View className="w-full border px-6 rounded-2xl p-4 mt-4">
             <View className="flex-1 flex-row items-center justify-between mb-4">
               <Text className="dark:text-white mt-2">
                 Transactions recentes
