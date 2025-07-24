@@ -5,7 +5,6 @@ import PaymentMethodModal, {
 } from "@/components/payment/PaymentMethod";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
-import Input from "@/components/ui/Input";
 import React, { useRef, useState } from "react";
 import {
   Image,
@@ -76,10 +75,17 @@ export default function TransfertScreen() {
         </View>
         <ScrollView className="flex-1" keyboardShouldPersistTaps="handled">
           <View className="flex-1 w-full px-6">
-            <View className="my-6">
-              <Input
-                label="Numéro de téléphone"
-                placeholder="0612345678"
+            <View className="my-6 flex-row items-center justify-center gap-2">
+              <View className="flex-row items-center border border-gray-300 p-2 rounded-2xl h-16">
+                <Text className="text-xl font-bold text-gray-400">
+                  🇨🇩 +243
+                </Text>
+              </View>
+              <TextInput
+                placeholder="Numéro de téléphone"
+                className="flex-1 h-16 rounded-2xl border text-xl text-indigo-500 border-gray-300 p-2"
+                maxLength={10}
+                keyboardType="numeric"
                 value={recipient}
                 onChangeText={setRecipient}
               />
@@ -105,9 +111,10 @@ export default function TransfertScreen() {
               />
             </View>
             <View className="my-6">
-              <Input
-                label="Raison du transfert"
+              <TextInput
                 placeholder="Raison du transfert"
+                className="w-full h-16 rounded-2xl border text-xl text-indigo-500 border-gray-300 p-2 mt-3"
+                maxLength={10}
                 value={reason}
                 onChangeText={setReason}
               />

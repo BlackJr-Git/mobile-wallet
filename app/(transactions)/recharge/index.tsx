@@ -18,6 +18,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import * as Animatable from "react-native-animatable";
 
 interface PaymentMethodType {
   id: number;
@@ -49,6 +50,38 @@ const paymentMethods: PaymentMethodType[] = [
   },
 ];
 
+const operators = [
+  {
+    id: 1,
+    name: "Orange",
+    slug: "orange",
+
+    image:
+      "https://res.cloudinary.com/devhqdrwl/image/upload/v1753267545/Orange_logo.svg_zn2cg8.png",
+  },
+  {
+    id: 2,
+    name: "Vodacom",
+    slug: "vodacom",
+    image:
+      "https://res.cloudinary.com/devhqdrwl/image/upload/v1753268199/vodacom-logo_pvowmx.png",
+  },
+  {
+    id: 3,
+    name: "Airtel",
+    slug: "airtel",
+    image:
+      "https://res.cloudinary.com/devhqdrwl/image/upload/v1753267541/Airtel_logo_gfyke6.png",
+  },
+  {
+    id: 4,
+    name: "Africell",
+    slug: "africell",
+    image:
+      "https://res.cloudinary.com/devhqdrwl/image/upload/v1753267550/Africell_logo_tjnzbm.jpg",
+  },
+];
+
 const rechargeMethods = [
   {
     id: 1,
@@ -66,9 +99,15 @@ export default function TransfertScreen() {
   const paymentMethodModalRef = useRef<PaymentMethodModalRef>(null);
   const [amount, setAmount] = useState("");
   const [rechargeMethod, setRechargeMethod] = useState<string>("mobile-money");
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardExpiryDate, setCardExpiryDate] = useState("");
+  const [cardCvv, setCardCvv] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     React.useState<PaymentMethodType>(paymentMethods[0]);
-
+  const [selectedOperator, setSelectedOperator] = React.useState<string | null>(
+    null
+  );
   const handleSubmit = () => {
     // TODO: implement submit logic
     console.log(amount, rechargeMethod, selectedPaymentMethod);
@@ -87,9 +126,13 @@ export default function TransfertScreen() {
             <Text className="text-2xl font-bold dark:text-white">Recharge</Text>
             <NotificationsModal />
           </View>
-          <ScrollView className="flex-1" keyboardShouldPersistTaps="handled">
-            <View className="flex-1 w-full px-6">
-              <View className="my-6">
+          <ScrollView
+            className="flex-1"
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+          >
+            <View className="flex-1 w-full">
+              <View className="my-6 px-6">
                 <Text className="text-foreground dark:text-white font-semibold mb-2 text-xl">
                   Selectionnez le portmonnaie a recharger
                 </Text>
@@ -101,7 +144,7 @@ export default function TransfertScreen() {
                   onPress={() => paymentMethodModalRef.current?.expand()}
                 />
               </View>
-              <View className="w-full my-6">
+              <View className="w-full my-6 px-6">
                 <Text className="text-foreground dark:text-white font-semibold mb-2 text-xl">
                   Saisissez le montant
                 </Text>
@@ -116,7 +159,7 @@ export default function TransfertScreen() {
               </View>
 
               <View className="w-full my-6">
-                <View className="flex-row items-center justify-between bg-gray-200 dark:bg-gray-800 rounded-2xl  p-2">
+                <View className="flex-row items-center justify-between bg-gray-200 dark:bg-gray-800 rounded-2xl p-2 mx-6">
                   <Pressable
                     onPress={() => setRechargeMethod("mobile-money")}
                     className={
@@ -146,9 +189,106 @@ export default function TransfertScreen() {
                     </Text>
                   </Pressable>
                 </View>
+
+                {rechargeMethod === "mobile-money" && (
+                  <View className="my-6">
+                    <ScrollView
+                      horizontal
+                      showsHorizontalScrollIndicator={false}
+                      className="ml-6"
+                    >
+                      <View className="flex-row gap-2">
+                        {operators.map((operator) => {
+                          const isSelected = selectedOperator === operator.slug;
+                          return (
+                            <Animatable.View
+                              key={operator.id}
+                              animation={isSelected ? "pulse" : "fadeIn"}
+                              duration={500}
+                              delay={operator.id * 100}
+                            >
+                              <Pressable
+                                onPress={() =>
+                                  setSelectedOperator(operator.slug)
+                                }
+                                className="flex rounded-2xl items-center justify-center"
+                              >
+                                <Image
+                                  source={{ uri: operator.image }}
+                                  className={`w-28 h-28 rounded-2xl bg-white flex items-center justify-center ${
+                                    isSelected
+                                      ? "border-4 border-green-500"
+                                      : ""
+                                  }`}
+                                />
+                                <Text
+                                  className={`text-foreground dark:text-white text-lg  ${
+                                    isSelected ? "font-bold" : ""
+                                  }`}
+                                >
+                                  {operator.name}
+                                </Text>
+                              </Pressable>
+                            </Animatable.View>
+                          );
+                        })}
+                      </View>
+                    </ScrollView>
+                    <View className="mx-6 flex-row items-center justify-center gap-2 mt-3">
+                      <View className="flex-row items-center border border-gray-300 p-2 rounded-2xl h-16">
+                        <Text className="text-xl font-bold text-gray-400">
+                          🇨🇩 +243
+                        </Text>
+                      </View>
+                      <TextInput
+                        placeholder="Numéro de téléphone"
+                        className="flex-1 h-16 rounded-2xl border text-xl text-indigo-500 border-gray-300 p-2"
+                        maxLength={10}
+                        keyboardType="numeric"
+                        value={phoneNumber}
+                        onChangeText={setPhoneNumber}
+                      />
+                    </View>
+                  </View>
+                )}
+                {rechargeMethod === "card" && (
+                  <View className="my-6 px-6">
+                    <View>
+                      <Text className="text-foreground dark:text-white font-semibold text-xl mb-2">
+                        Informations de la carte
+                      </Text>
+                      <TextInput
+                        placeholder="1234 5678 9012 3456"
+                        className="w-full h-16 rounded-2xl border text-xl text-indigo-500 border-gray-300 p-2"
+                        maxLength={16}
+                        keyboardType="numeric"
+                        value={cardNumber}
+                        onChangeText={setCardNumber}
+                      />
+                    </View>
+                    <View className="flex-row items-center justify-between py-2 gap-2">
+                      <TextInput
+                        placeholder="MM/AA"
+                        className="flex-1 h-16 rounded-2xl border text-xl text-indigo-500 text-center border-gray-300 p-2"
+                        maxLength={5}
+                        keyboardType="numeric"
+                        value={cardExpiryDate}
+                        onChangeText={setCardExpiryDate}
+                      />
+                      <TextInput
+                        placeholder="CVV"
+                        className="flex-1 h-16 rounded-2xl border text-xl text-indigo-500 text-center border-gray-300 p-2"
+                        maxLength={3}
+                        keyboardType="numeric"
+                        value={cardCvv}
+                        onChangeText={setCardCvv}
+                      />
+                    </View>
+                  </View>
+                )}
               </View>
 
-              <View className="flex-1 flex-col">
+              <View className="flex-1 flex-col px-6">
                 <View className="flex-1"></View>
                 <Button
                   className="mb-6"

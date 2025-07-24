@@ -4,7 +4,6 @@ import PaymentMethodModal, {
   OpenPaymentMethodItem,
   PaymentMethodModalRef,
 } from "@/components/payment/PaymentMethod";
-import Input from "@/components/ui/Input";
 // import Logo from "@/components/ui/Logo";
 import Button from "@/components/ui/Button";
 import React, { useCallback, useRef } from "react";
@@ -109,14 +108,21 @@ export default function AchatCredit() {
               Entrez le numéro de téléphone
             </Text>
           </View>
-          <Input
-            maxLength={10}
-            keyboardType="numeric"
-            placeholder="0851750853"
-            // label="Numéro de téléphone"
-          />
+          <View className="flex-row items-center justify-center gap-2">
+            <View className="flex-row items-center border border-gray-300 p-2 rounded-2xl h-16">
+              <Text className="text-xl font-bold text-gray-400">🇨🇩 +243</Text>
+            </View>
+            <TextInput
+              placeholder="Numéro de téléphone"
+              className="flex-1 h-16 rounded-2xl border text-xl text-indigo-500 border-gray-300 p-2"
+              maxLength={10}
+              keyboardType="numeric"
+              // value={recipient}
+              // onChangeText={setRecipient}
+            />
+          </View>
         </View>
-        <View className="w-full pl-6 mt-4">
+        <View className="w-full pl-6 my-6">
           <Text className="text-foreground dark:text-white font-semibold mb-2 text-xl">
             Selectionnez un operateur
           </Text>
@@ -155,6 +161,16 @@ export default function AchatCredit() {
             </View>
           </ScrollView>
         </View>
+
+        <View className="w-full px-6 my-6">
+          <OpenPaymentMethodItem
+            icon={selectedPaymentMethod.image}
+            title={selectedPaymentMethod.name}
+            availableAmount={selectedPaymentMethod.availableAmount}
+            currency={selectedPaymentMethod.currency}
+            onPress={() => openSheet()}
+          />
+        </View>
         <View className="w-full px-6 mt-4">
           <Text className="text-foreground dark:text-white font-semibold mb-2 text-xl">
             Saisissez le montant
@@ -164,15 +180,6 @@ export default function AchatCredit() {
             className="flex focus-within:border-indigo-500 focus-within:border-2 w-full h-20 rounded-2xl border text-2xl text-indigo-500 font-bold text-center border-gray-300 p-2 items-center justify-center"
             placeholder="Montant"
             keyboardType="numeric"
-          />
-        </View>
-        <View className="w-full px-6 mt-4">
-          <OpenPaymentMethodItem
-            icon={selectedPaymentMethod.image}
-            title={selectedPaymentMethod.name}
-            availableAmount={selectedPaymentMethod.availableAmount}
-            currency={selectedPaymentMethod.currency}
-            onPress={() => openSheet()}
           />
         </View>
         <View className="w-full px-6 mt-4">
