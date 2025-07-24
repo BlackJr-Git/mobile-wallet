@@ -2,7 +2,7 @@ import { Redirect } from "expo-router";
 import { useState } from "react";
 
 export default function Index() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   if (isAuthenticated) {
     return <Redirect href="/(tabs)" />;

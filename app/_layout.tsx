@@ -47,6 +47,10 @@ export default function RootLayout() {
                 name="(services)"
                 options={{ headerShown: false }}
               />
+              <Stack.Screen
+                name="(transactions)"
+                options={{ headerShown: false }}
+              />
               <Stack.Screen name="(auth)" options={{ headerShown: false }} />
               <Stack.Screen name="+not-found" />
             </Stack>
