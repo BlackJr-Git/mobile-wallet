@@ -2,13 +2,17 @@ import Greet from "@/components/Greet";
 import ProfileSheet from "@/components/home/ProfileSheet";
 import NotificationsModal from "@/components/notifications/NotificationsModal";
 import ServiceItem from "@/components/services/ServiceItem";
-import ServiceModal, { ServiceModalRef, OpenServiceItem } from "@/components/services/ServiceModal";
+import ServiceModal, {
+  OpenServiceItem,
+  ServiceModalRef,
+} from "@/components/services/ServiceModal";
 import Icon from "@/components/ui/Icon";
 import Logo from "@/components/ui/Logo";
 
+import { useRouter } from "expo-router";
 import { icons } from "lucide-react-native";
 import { useCallback, useRef } from "react";
-import { Image, ScrollView, Text, View } from "react-native";
+import { Image, Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const promo1Img = require("../../assets/images/promo-1.png");
@@ -67,8 +71,9 @@ const promotions: PromotionItemProps[] = [
 ];
 
 export default function HomeScreen() {
+  const router = useRouter();
   const serviceModalRef = useRef<ServiceModalRef>(null);
-  
+
   const openSheet = useCallback(() => {
     serviceModalRef.current?.expand();
   }, []);
@@ -102,21 +107,27 @@ export default function HomeScreen() {
               <Text className="text-foreground dark:text-white">CDF</Text>
             </View>
           </View>
-          <View className="w-full flex-row border border-indigo-500 bg-indigo-500 rounded-2xl p-4 mt-4">
-            <View className="flex-1 items-center justify-between">
-              <Icon name="ArrowRightLeft" size={32} color="#fff" />
-              <Text className="text-white mt-2">Transférer</Text>
-            </View>
+          <View className="w-full flex-row border justify-center gap-8 border-indigo-500 bg-indigo-500 rounded-2xl p-4 mt-4">
+            <Pressable onPress={() => router.push("/transfert")} className="">
+              <View className="flex-1 items-center justify-between">
+                <Icon name="ArrowRightLeft" size={32} color="#fff" />
+                <Text className="text-white mt-2">Transférer</Text>
+              </View>
+            </Pressable>
             <View className="bg-indigo-200 w-[1px] h-full"></View>
-            <View className="flex-1 items-center justify-between">
-              <Icon name="BanknoteArrowUp" size={32} color="#fff" />
-              <Text className="text-white mt-2">Appro</Text>
-            </View>
+            <Pressable onPress={() => router.push("/recharge")} className="">
+              <View className="flex-1 items-center justify-between">
+                <Icon name="BanknoteArrowUp" size={32} color="#fff" />
+                <Text className="text-white mt-2">Appro</Text>
+              </View>
+            </Pressable>
             <View className="bg-indigo-200 w-[1px] h-full"></View>
-            <View className="flex-1 items-center justify-between">
-              <Icon name="History" size={32} color="#fff" />
-              <Text className="text-white mt-2">Historique</Text>
-            </View>
+            <Pressable onPress={() => router.push("/")} className="">
+              <View className="flex-1 items-center justify-between">
+                <Icon name="History" size={32} color="#fff" />
+                <Text className="text-white mt-2">Historique</Text>
+              </View>
+            </Pressable>
           </View>
           <View className="w-full flex-row justify-between my-6">
             {services.map((service) => (
