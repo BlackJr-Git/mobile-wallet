@@ -6,7 +6,7 @@ import { SafeAreaView, Text, View } from "react-native";
 
 import Icon from "@/components/ui/Icon";
 
-export default function Change() {
+export default function Assurance() {
   return (
     <SafeAreaView className="flex-1 bg-background">
       <View className="w-full flex-row items-center justify-between px-6 pb-4 mb-4 z-10 bg-background">
