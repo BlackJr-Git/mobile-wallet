@@ -19,6 +19,7 @@ import {
   View,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
+import BackButton from "@/components/BackButton";
 
 interface PaymentMethodType {
   id: number;
@@ -121,10 +122,11 @@ export default function TransfertScreen() {
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
           <View className="w-full flex-row items-center justify-between px-6 pb-4 mb-4 z-10 bg-background">
-            <ProfileSheet />
+            {/* <ProfileSheet /> */}
+            <BackButton />
             {/* <Logo variant="default" size="small" /> */}
             <Text className="text-2xl font-bold text-indigo-500 dark:text-indigo-400">
-              Recharge
+              Approvisionnement
             </Text>
             <NotificationsModal />
           </View>

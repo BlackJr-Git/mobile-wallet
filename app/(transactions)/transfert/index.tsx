@@ -1,3 +1,4 @@
+import CreditCardIcon from "@/assets/images/credit card.svg";
 import ProfileSheet from "@/components/home/ProfileSheet";
 import NotificationsModal from "@/components/notifications/NotificationsModal";
 import PaymentMethodModal, {
@@ -5,6 +6,7 @@ import PaymentMethodModal, {
 } from "@/components/payment/PaymentMethod";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
+// import LottieView from "lottie-react-native";
 import React, { useRef, useState } from "react";
 import {
   Image,
@@ -16,7 +18,8 @@ import {
   TextInput,
   View,
 } from "react-native";
-import CreditCardIcon from "@/assets/images/credit card.svg";
+// const creditCardAnimation = require("../../../assets/animations/creditCard.json");
+import BackButton from "@/components/BackButton";
 
 interface PaymentMethodType {
   id: number;
@@ -67,7 +70,8 @@ export default function TransfertScreen() {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <View className="w-full flex-row items-center justify-between px-6 pb-4 mb-4 z-10 bg-background mt-16">
-          <ProfileSheet />
+          {/* <ProfileSheet /> */}
+          <BackButton />
           {/* <Logo variant="default" size="small" /> */}
           <Text className="text-2xl font-bold text-indigo-500 dark:text-indigo-400">
             Transfert d&apos;argent
@@ -78,9 +82,7 @@ export default function TransfertScreen() {
           <View className="flex-1 w-full px-6">
             <View className="my-6 flex-row items-center justify-center gap-2">
               <View className="flex-row items-center border border-gray-300 dark:border-gray-700 p-2 rounded-2xl h-16">
-                <Text className="text-xl font-bold text-gray-400">
-                  🇨🇩 +243
-                </Text>
+                <Text className="text-xl font-bold text-gray-400">🇨🇩 +243</Text>
               </View>
               <TextInput
                 placeholder="Numéro de téléphone"
@@ -131,7 +133,12 @@ export default function TransfertScreen() {
                 title="Continuer"
                 onPress={handleSubmit}
               />
-              <CreditCardIcon />
+              {/* <LottieView
+                source={creditCardAnimation}
+                autoPlay
+                loop
+                style={{ width: 200, height: 200 }}
+              /> */}
             </View>
           </View>
         </ScrollView>

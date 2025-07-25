@@ -13,6 +13,7 @@ import "react-native-reanimated";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
+// import { PortalHost } from '@rn-primitives/portal';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();

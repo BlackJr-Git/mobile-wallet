@@ -4,6 +4,7 @@ import Icon from "@/components/ui/Icon";
 import React, { useState } from "react";
 import { Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
 import * as Animatable from "react-native-animatable";
+import BackButton from "@/components/BackButton";
 
 // Types
 interface Transaction {
@@ -57,8 +58,8 @@ const mockTransactions: Transaction[] = [
     currency: "USD",
     date: "2025-01-23T14:10:00Z",
     status: "completed",
-    description: "Reçu de Marie Dupont",
-    sender: "Marie Dupont",
+    description: "Reçu de Zack Kba",
+    sender: "Zack Kba",
   },
   {
     id: "5",
@@ -67,8 +68,8 @@ const mockTransactions: Transaction[] = [
     currency: "USD",
     date: "2025-01-23T11:30:00Z",
     status: "pending",
-    description: "Transfert vers Alice Martin",
-    recipient: "Alice Martin",
+    description: "Transfert vers Junior As",
+    recipient: "Junior As",
   },
 ];
 
@@ -97,7 +98,8 @@ export default function HistoriqueScreen() {
     <SafeAreaView className="flex-1 bg-gray-50 dark:bg-background-0">
       {/* Header */}
       <View className="w-full flex-row items-center justify-between px-6 pb-4 mb-4 z-10 bg-background">
-        <ProfileSheet />
+        {/* <ProfileSheet /> */}
+        <BackButton />
         {/* <Logo variant="default" size="small" /> */}
         <Text className="text-2xl font-bold text-indigo-500 dark:text-indigo-400">
           Historique
