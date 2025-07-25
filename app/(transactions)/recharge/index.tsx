@@ -82,18 +82,18 @@ const operators = [
   },
 ];
 
-const rechargeMethods = [
-  {
-    id: 1,
-    name: "Carte de crédit",
-    slug: "card",
-  },
-  {
-    id: 2,
-    name: "Mobile Money",
-    slug: "mobile-money",
-  },
-];
+// const rechargeMethods = [
+//   {
+//     id: 1,
+//     name: "Carte de crédit",
+//     slug: "card",
+//   },
+//   {
+//     id: 2,
+//     name: "Mobile Money",
+//     slug: "mobile-money",
+//   },
+// ];
 
 export default function TransfertScreen() {
   const paymentMethodModalRef = useRef<PaymentMethodModalRef>(null);

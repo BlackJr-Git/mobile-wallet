@@ -4,8 +4,9 @@ import { Divider } from "@/components/ui/divider";
 import Icon from "@/components/ui/Icon";
 import CreditCard from "@/components/Wallets/CreditCard";
 import TransactionCard from "@/components/Wallets/TransactionCard";
-import { ColorValue, ScrollView, Text, View } from "react-native";
+import { ColorValue, ScrollView, Text, View, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
 
 type CreditCardItemProps = {
   id: number;
@@ -86,6 +87,7 @@ const Transactions = [
 ];
 
 export default function WalletScreen() {
+  const router = useRouter();
   return (
     <SafeAreaView>
       <View className="w-full relative">
@@ -127,18 +129,18 @@ export default function WalletScreen() {
           </View>
           <View className="w-full px-6">
             <View className="w-full flex-row border border-indigo-500 bg-indigo-500 rounded-2xl p-4 mt-4">
-              <View className="flex-1 items-center justify-between">
+              <Pressable onPress={() => router.push("/transfert")} className="flex-1 items-center justify-between">
                 <Icon name="ArrowRightLeft" size={32} color="#fff" />
                 <Text className="text-white mt-2">Transférer</Text>
-              </View>
+              </Pressable>
               <View className="bg-indigo-200 w-[1px] h-full"></View>
-              <View className="flex-1 items-center justify-between">
+              <Pressable onPress={() => router.push("/recharge")} className="flex-1 items-center justify-between">
                 <Icon name="BanknoteArrowUp" size={32} color="#fff" />
                 <Text className="text-white mt-2">Approvisionner</Text>
-              </View>
+              </Pressable>
             </View>
           </View>
-          <View className="w-full border px-6 rounded-2xl p-4 mt-4">
+          <View className="w-full px-6 rounded-2xl p-4 mt-4">
             <View className="flex-1 flex-row items-center justify-between mb-4">
               <Text className="dark:text-white mt-2">
                 Transactions recentes

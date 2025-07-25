@@ -122,7 +122,7 @@ export default function HomeScreen() {
               </View>
             </Pressable>
             <View className="bg-indigo-200 w-[1px] h-full"></View>
-            <Pressable onPress={() => router.push("/")} className="">
+            <Pressable onPress={() => router.push("/historique")} className="">
               <View className="flex-1 items-center justify-between">
                 <Icon name="History" size={32} color="#fff" />
                 <Text className="text-white mt-2">Historique</Text>
