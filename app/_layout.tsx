@@ -1,5 +1,4 @@
 import "@/app/global.css";
-import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import {
   DarkTheme,
   DefaultTheme,
@@ -29,7 +28,7 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <GluestackUIProvider
+        {/* <GluestackUIProvider
           mode={
             Platform.OS === "android"
               ? DefaultTheme
@@ -37,26 +36,31 @@ export default function RootLayout() {
               ? DarkTheme
               : (DefaultTheme as any)
           }
+        > */}
+        <ThemeProvider
+          value={
+            Platform.OS === "android"
+              ? DefaultTheme
+              : colorScheme === "dark"
+              ? DarkTheme
+              : DefaultTheme
+          }
         >
-          <ThemeProvider
-            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-          >
-            <Stack initialRouteName="(tabs)">
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              <Stack.Screen
-                name="(services)"
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="(transactions)"
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-              <Stack.Screen name="+not-found" />
-            </Stack>
-            <StatusBar style="auto" />
-          </ThemeProvider>
-        </GluestackUIProvider>
+          <Stack initialRouteName="(tabs)">
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="(services)" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="(transactions)"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="factures" options={{ headerShown: false }} />
+
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+          <StatusBar style="auto" />
+        </ThemeProvider>
+        {/* </GluestackUIProvider> */}
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

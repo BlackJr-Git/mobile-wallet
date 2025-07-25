@@ -1,19 +1,12 @@
-import { router, useLocalSearchParams } from "expo-router";
-import React from "react";
-import {
-  ScrollView,
-  Text,
-  View,
-  Pressable,
-  Share,
-  Alert,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import * as Animatable from "react-native-animatable";
+import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 import PressableIcon from "@/components/ui/PressableIcon";
-import Button from "@/components/ui/Button";
 import { formatDateTimeFR } from "@/utils/formatDate";
+import { router, useLocalSearchParams } from "expo-router";
+import React from "react";
+import { Alert, Pressable, ScrollView, Share, Text, View } from "react-native";
+import * as Animatable from "react-native-animatable";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // Types
 interface InvoiceItem {
@@ -116,6 +109,10 @@ const mockInvoices: Record<string, Invoice> = {
   },
 };
 
+export const screenOptions = {
+  headerShown: false,
+};
+
 export default function InvoiceDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const invoice = mockInvoices[id || "1"];
@@ -189,7 +186,11 @@ export default function InvoiceDetailsScreen() {
   const handleShare = async () => {
     try {
       await Share.share({
-        message: `Facture ${invoice.invoiceNumber}\nMontant: ${invoice.amount} ${invoice.currency}\nMarchand: ${invoice.merchant}\nDate: ${formatDateTimeFR(invoice.date)}`,
+        message: `Facture ${invoice.invoiceNumber}\nMontant: ${
+          invoice.amount
+        } ${invoice.currency}\nMarchand: ${
+          invoice.merchant
+        }\nDate: ${formatDateTimeFR(invoice.date)}`,
         title: `Facture ${invoice.invoiceNumber}`,
       });
     } catch {
@@ -206,14 +207,10 @@ export default function InvoiceDetailsScreen() {
 
   const handlePayment = () => {
     if (invoice.status === "pending" || invoice.status === "overdue") {
-      Alert.alert(
-        "Paiement",
-        "Redirection vers la page de paiement...",
-        [
-          { text: "Annuler", style: "cancel" },
-          { text: "Continuer", onPress: () => {} },
-        ]
-      );
+      Alert.alert("Paiement", "Redirection vers la page de paiement...", [
+        { text: "Annuler", style: "cancel" },
+        { text: "Continuer", onPress: () => {} },
+      ]);
     }
   };
 
@@ -275,7 +272,11 @@ export default function InvoiceDetailsScreen() {
                 <Text className="text-2xl font-bold text-foreground dark:text-white">
                   {invoice.amount.toLocaleString()} {invoice.currency}
                 </Text>
-                <Text className={`text-sm font-medium ${getStatusColor(invoice.status)}`}>
+                <Text
+                  className={`text-sm font-medium ${getStatusColor(
+                    invoice.status
+                  )}`}
+                >
                   {getStatusText(invoice.status)}
                 </Text>
               </View>
@@ -283,13 +284,17 @@ export default function InvoiceDetailsScreen() {
 
             <View className="flex-row justify-between pt-4 border-t border-gray-100 dark:border-gray-800">
               <View>
-                <Text className="text-xs text-gray-500 mb-1">Date d&apos;émission</Text>
+                <Text className="text-xs text-gray-500 mb-1">
+                  Date d&apos;émission
+                </Text>
                 <Text className="text-sm font-medium text-foreground dark:text-white">
                   {formatDateTimeFR(invoice.date)}
                 </Text>
               </View>
               <View>
-                <Text className="text-xs text-gray-500 mb-1">Date d&apos;échéance</Text>
+                <Text className="text-xs text-gray-500 mb-1">
+                  Date d&apos;échéance
+                </Text>
                 <Text className="text-sm font-medium text-foreground dark:text-white">
                   {formatDateTimeFR(invoice.dueDate)}
                 </Text>
@@ -309,7 +314,11 @@ export default function InvoiceDetailsScreen() {
                 key={item.id}
                 animation="fadeInLeft"
                 delay={600 + index * 100}
-                className={`p-4 ${index < invoice.items.length - 1 ? 'border-b border-gray-100 dark:border-gray-800' : ''}`}
+                className={`p-4 ${
+                  index < invoice.items.length - 1
+                    ? "border-b border-gray-100 dark:border-gray-800"
+                    : ""
+                }`}
               >
                 <View className="flex-row justify-between items-start">
                   <View className="flex-1 mr-4">
@@ -317,7 +326,8 @@ export default function InvoiceDetailsScreen() {
                       {item.description}
                     </Text>
                     <Text className="text-sm text-gray-500">
-                      {item.quantity} × {item.unitPrice.toLocaleString()} {invoice.currency}
+                      {item.quantity} × {item.unitPrice.toLocaleString()}{" "}
+                      {invoice.currency}
                     </Text>
                   </View>
                   <Text className="font-semibold text-foreground dark:text-white">
@@ -335,33 +345,39 @@ export default function InvoiceDetailsScreen() {
             <Text className="text-lg font-semibold text-foreground dark:text-white mb-4">
               Résumé
             </Text>
-            
+
             <View className="space-y-3">
               <View className="flex-row justify-between">
-                <Text className="text-gray-600 dark:text-gray-400">Sous-total</Text>
+                <Text className="text-gray-600 dark:text-gray-400">
+                  Sous-total
+                </Text>
                 <Text className="font-medium text-foreground dark:text-white">
                   {invoice.subtotal.toLocaleString()} {invoice.currency}
                 </Text>
               </View>
-              
+
               {invoice.taxes > 0 && (
                 <View className="flex-row justify-between">
-                  <Text className="text-gray-600 dark:text-gray-400">Taxes</Text>
+                  <Text className="text-gray-600 dark:text-gray-400">
+                    Taxes
+                  </Text>
                   <Text className="font-medium text-foreground dark:text-white">
                     {invoice.taxes.toLocaleString()} {invoice.currency}
                   </Text>
                 </View>
               )}
-              
+
               {invoice.fees > 0 && (
                 <View className="flex-row justify-between">
-                  <Text className="text-gray-600 dark:text-gray-400">Frais</Text>
+                  <Text className="text-gray-600 dark:text-gray-400">
+                    Frais
+                  </Text>
                   <Text className="font-medium text-foreground dark:text-white">
                     {invoice.fees.toLocaleString()} {invoice.currency}
                   </Text>
                 </View>
               )}
-              
+
               <View className="border-t border-gray-200 dark:border-gray-700 pt-3">
                 <View className="flex-row justify-between">
                   <Text className="text-lg font-semibold text-foreground dark:text-white">
@@ -377,7 +393,11 @@ export default function InvoiceDetailsScreen() {
         </Animatable.View>
 
         {/* Payment Information */}
-        <Animatable.View animation="fadeInUp" delay={1000} className="px-6 mb-6">
+        <Animatable.View
+          animation="fadeInUp"
+          delay={1000}
+          className="px-6 mb-6"
+        >
           <Text className="text-lg font-semibold text-foreground dark:text-white mb-4">
             Informations de paiement
           </Text>
@@ -385,16 +405,20 @@ export default function InvoiceDetailsScreen() {
             <View className="space-y-4">
               {invoice.paymentMethod && (
                 <View>
-                  <Text className="text-sm text-gray-500 mb-1">Méthode de paiement</Text>
+                  <Text className="text-sm text-gray-500 mb-1">
+                    Méthode de paiement
+                  </Text>
                   <Text className="font-medium text-foreground dark:text-white">
                     {invoice.paymentMethod}
                   </Text>
                 </View>
               )}
-              
+
               {invoice.transactionId && (
                 <View>
-                  <Text className="text-sm text-gray-500 mb-1">ID de transaction</Text>
+                  <Text className="text-sm text-gray-500 mb-1">
+                    ID de transaction
+                  </Text>
                   <Text className="font-mono text-sm text-foreground dark:text-white">
                     {invoice.transactionId}
                   </Text>
@@ -405,7 +429,11 @@ export default function InvoiceDetailsScreen() {
         </Animatable.View>
 
         {/* Merchant Information */}
-        <Animatable.View animation="fadeInUp" delay={1200} className="px-6 mb-6">
+        <Animatable.View
+          animation="fadeInUp"
+          delay={1200}
+          className="px-6 mb-6"
+        >
           <Text className="text-lg font-semibold text-foreground dark:text-white mb-4">
             Informations du marchand
           </Text>
@@ -417,7 +445,7 @@ export default function InvoiceDetailsScreen() {
                   {invoice.merchant}
                 </Text>
               </View>
-              
+
               {invoice.merchantAddress && (
                 <View>
                   <Text className="text-sm text-gray-500 mb-1">Adresse</Text>
@@ -426,17 +454,19 @@ export default function InvoiceDetailsScreen() {
                   </Text>
                 </View>
               )}
-              
+
               <View className="flex-row justify-between">
                 {invoice.merchantPhone && (
                   <View className="flex-1 mr-4">
-                    <Text className="text-sm text-gray-500 mb-1">Téléphone</Text>
+                    <Text className="text-sm text-gray-500 mb-1">
+                      Téléphone
+                    </Text>
                     <Text className="text-foreground dark:text-white">
                       {invoice.merchantPhone}
                     </Text>
                   </View>
                 )}
-                
+
                 {invoice.merchantEmail && (
                   <View className="flex-1">
                     <Text className="text-sm text-gray-500 mb-1">Email</Text>
@@ -452,7 +482,11 @@ export default function InvoiceDetailsScreen() {
 
         {/* Notes */}
         {invoice.notes && (
-          <Animatable.View animation="fadeInUp" delay={1400} className="px-6 mb-6">
+          <Animatable.View
+            animation="fadeInUp"
+            delay={1400}
+            className="px-6 mb-6"
+          >
             <Text className="text-lg font-semibold text-foreground dark:text-white mb-4">
               Notes
             </Text>
@@ -465,7 +499,11 @@ export default function InvoiceDetailsScreen() {
         )}
 
         {/* Action Buttons */}
-        <Animatable.View animation="fadeInUp" delay={1600} className="px-6 pb-8">
+        <Animatable.View
+          animation="fadeInUp"
+          delay={1600}
+          className="px-6 pb-8"
+        >
           {(invoice.status === "pending" || invoice.status === "overdue") && (
             <Button
               title="Payer maintenant"
@@ -473,7 +511,7 @@ export default function InvoiceDetailsScreen() {
               className="bg-indigo-600 mb-4"
             />
           )}
-          
+
           <View className="flex-row gap-4">
             <Pressable
               onPress={handleShare}
@@ -484,7 +522,7 @@ export default function InvoiceDetailsScreen() {
                 Partager
               </Text>
             </Pressable>
-            
+
             <Pressable
               onPress={handleDownload}
               className="flex-1 bg-gray-100 dark:bg-gray-800 rounded-xl py-4 items-center"
