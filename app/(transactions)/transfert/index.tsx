@@ -18,6 +18,7 @@ import {
 } from "react-native";
 // const creditCardAnimation = require("../../../assets/animations/creditCard.json");
 import BackButton from "@/components/BackButton";
+import { useRouter } from "expo-router";
 
 interface PaymentMethodType {
   id: number;
@@ -50,6 +51,7 @@ const paymentMethods: PaymentMethodType[] = [
 ];
 
 export default function TransfertScreen() {
+  const router = useRouter()
   const paymentMethodModalRef = useRef<PaymentMethodModalRef>(null);
   const [recipient, setRecipient] = useState("");
   const [amount, setAmount] = useState("");
@@ -59,6 +61,7 @@ export default function TransfertScreen() {
 
   const handleSubmit = () => {
     // TODO: implement submit logic
+    router.push("/transfert/[id]")
   };
 
   return (
