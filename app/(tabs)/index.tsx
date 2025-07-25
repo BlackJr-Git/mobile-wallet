@@ -79,57 +79,62 @@ export default function HomeScreen() {
   }, []);
   return (
     <SafeAreaView className="w-full h-full">
-      <View className="w-full">
+      <View className="w-full flex-1">
         <View className="w-full flex-row items-center justify-between px-6 pb-4 mb-4 z-10 bg-background">
           <ProfileSheet />
           <Logo variant="default" size="small" />
           <NotificationsModal />
         </View>
-        <ScrollView className="w-full px-6 mt-4">
-          <View className="w-full">
+        <ScrollView className="w-full">
+          <View className="w-full px-6">
             <Greet name="Junior" />
             <Text className="text-foreground dark:text-white">
               Votre solde disponible
             </Text>
           </View>
-          <View className="w-full flex-row border border-indigo-500 rounded-2xl p-6 mt-4">
-            <View className="flex-1 items-center justify-between">
-              <Text className="text-foreground dark:text-white text-2xl font-bold">
-                1,035,000
-              </Text>
-              <Text className="text-foreground dark:text-white">USD</Text>
+          <View className="w-full px-6">
+            <View className="w-full flex-row border border-indigo-500 rounded-2xl p-6 mt-4">
+              <View className="flex-1 items-center justify-between">
+                <Text className="text-foreground dark:text-white text-2xl font-bold">
+                  1,035,000
+                </Text>
+                <Text className="text-foreground dark:text-white">USD</Text>
+              </View>
+              <View className="bg-indigo-200 w-[1px] h-full"></View>
+              <View className="flex-1 items-center justify-between">
+                <Text className="text-foreground dark:text-white text-2xl font-bold">
+                  2,000,000
+                </Text>
+                <Text className="text-foreground dark:text-white">CDF</Text>
+              </View>
             </View>
-            <View className="bg-indigo-200 w-[1px] h-full"></View>
-            <View className="flex-1 items-center justify-between">
-              <Text className="text-foreground dark:text-white text-2xl font-bold">
-                2,000,000
-              </Text>
-              <Text className="text-foreground dark:text-white">CDF</Text>
+            <View className="w-full flex-row border justify-center gap-8 border-indigo-500 bg-indigo-500 rounded-2xl p-4 mt-4">
+              <Pressable onPress={() => router.push("/transfert")} className="">
+                <View className="flex-1 items-center justify-between">
+                  <Icon name="ArrowRightLeft" size={32} color="#fff" />
+                  <Text className="text-white mt-2">Transférer</Text>
+                </View>
+              </Pressable>
+              <View className="bg-indigo-200 w-[1px] h-full"></View>
+              <Pressable onPress={() => router.push("/recharge")} className="">
+                <View className="flex-1 items-center justify-between">
+                  <Icon name="BanknoteArrowUp" size={32} color="#fff" />
+                  <Text className="text-white mt-2">Appro</Text>
+                </View>
+              </Pressable>
+              <View className="bg-indigo-200 w-[1px] h-full"></View>
+              <Pressable
+                onPress={() => router.push("/historique")}
+                className=""
+              >
+                <View className="flex-1 items-center justify-between">
+                  <Icon name="History" size={32} color="#fff" />
+                  <Text className="text-white mt-2">Historique</Text>
+                </View>
+              </Pressable>
             </View>
           </View>
-          <View className="w-full flex-row border justify-center gap-8 border-indigo-500 bg-indigo-500 rounded-2xl p-4 mt-4">
-            <Pressable onPress={() => router.push("/transfert")} className="">
-              <View className="flex-1 items-center justify-between">
-                <Icon name="ArrowRightLeft" size={32} color="#fff" />
-                <Text className="text-white mt-2">Transférer</Text>
-              </View>
-            </Pressable>
-            <View className="bg-indigo-200 w-[1px] h-full"></View>
-            <Pressable onPress={() => router.push("/recharge")} className="">
-              <View className="flex-1 items-center justify-between">
-                <Icon name="BanknoteArrowUp" size={32} color="#fff" />
-                <Text className="text-white mt-2">Appro</Text>
-              </View>
-            </Pressable>
-            <View className="bg-indigo-200 w-[1px] h-full"></View>
-            <Pressable onPress={() => router.push("/historique")} className="">
-              <View className="flex-1 items-center justify-between">
-                <Icon name="History" size={32} color="#fff" />
-                <Text className="text-white mt-2">Historique</Text>
-              </View>
-            </Pressable>
-          </View>
-          <View className="w-full flex-row justify-between my-6">
+          <View className="w-full flex-row justify-between my-6 px-6">
             {services.map((service) => (
               <ServiceItem
                 key={service.title}
@@ -148,15 +153,19 @@ export default function HomeScreen() {
             />
           </View>
 
-          <View className="w-full">
-            <View className="flex-row items-center justify-between w-full">
+          <View className="w-full px-6">
+            <View className="flex-row items-center justify-between w-full mb-4">
               <Text className="text-xl font-bold dark:text-white">
                 Promotions
               </Text>
               <Text className="text-slate-500 dark:text-white">Voir plus</Text>
             </View>
           </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <ScrollView
+            className="pl-6"
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          >
             <View className="flex-row gap-1">
               {promotions.map((promotion) => (
                 <PromotionItem

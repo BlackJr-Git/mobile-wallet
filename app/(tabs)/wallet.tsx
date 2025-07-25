@@ -101,6 +101,7 @@ export default function WalletScreen() {
         </View>
         <ScrollView
           className="w-full mt-20 pb-64"
+          contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}
           showsVerticalScrollIndicator={false}
         >
           <ScrollView
