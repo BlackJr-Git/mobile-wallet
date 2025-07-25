@@ -16,6 +16,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import CreditCardIcon from "@/assets/images/credit card.svg";
 
 interface PaymentMethodType {
   id: number;
@@ -76,14 +77,14 @@ export default function TransfertScreen() {
         <ScrollView className="flex-1" keyboardShouldPersistTaps="handled">
           <View className="flex-1 w-full px-6">
             <View className="my-6 flex-row items-center justify-center gap-2">
-              <View className="flex-row items-center border border-gray-300 p-2 rounded-2xl h-16">
+              <View className="flex-row items-center border border-gray-300 dark:border-gray-700 p-2 rounded-2xl h-16">
                 <Text className="text-xl font-bold text-gray-400">
                   🇨🇩 +243
                 </Text>
               </View>
               <TextInput
                 placeholder="Numéro de téléphone"
-                className="flex-1 h-16 rounded-2xl border text-xl text-indigo-500 border-gray-300 p-2"
+                className="flex-1 h-16 rounded-2xl border text-xl text-indigo-500 border-gray-300 dark:border-gray-700 p-2"
                 maxLength={10}
                 keyboardType="numeric"
                 value={recipient}
@@ -113,7 +114,7 @@ export default function TransfertScreen() {
             <View className="my-6">
               <TextInput
                 placeholder="Raison du transfert"
-                className="w-full h-16 rounded-2xl border text-xl text-indigo-500 border-gray-300 p-2 mt-3"
+                className="w-full h-16 rounded-2xl border text-xl text-indigo-500 border-gray-300 dark:border-gray-700 p-2 mt-3"
                 maxLength={10}
                 value={reason}
                 onChangeText={setReason}
@@ -130,6 +131,7 @@ export default function TransfertScreen() {
                 title="Continuer"
                 onPress={handleSubmit}
               />
+              <CreditCardIcon />
             </View>
           </View>
         </ScrollView>
