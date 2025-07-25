@@ -1,4 +1,4 @@
-import ProfileSheet from "@/components/home/ProfileSheet";
+import BackButton from "@/components/BackButton";
 import NotificationsModal from "@/components/notifications/NotificationsModal";
 import PaymentMethodModal, {
   PaymentMethodModalRef,
@@ -19,7 +19,6 @@ import {
   View,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
-import BackButton from "@/components/BackButton";
 
 interface PaymentMethodType {
   id: number;
@@ -165,8 +164,12 @@ export default function TransfertScreen() {
               <View className="w-full my-6">
                 <View className="flex-row items-center justify-between bg-gray-200 dark:bg-gray-800 rounded-2xl p-2 mx-6">
                   <Animatable.View
-                    key={rechargeMethod === "mobile-money" ? "active" : "inactive"}
-                    animation={rechargeMethod === "mobile-money" ? "bounceIn" : "fadeIn"}
+                    key={
+                      rechargeMethod === "mobile-money" ? "active" : "inactive"
+                    }
+                    animation={
+                      rechargeMethod === "mobile-money" ? "bounceIn" : "fadeIn"
+                    }
                     duration={400}
                   >
                     <Pressable
@@ -186,7 +189,9 @@ export default function TransfertScreen() {
                   </Animatable.View>
                   <Animatable.View
                     key={rechargeMethod === "card" ? "active" : "inactive"}
-                    animation={rechargeMethod === "card" ? "bounceIn" : "fadeIn"}
+                    animation={
+                      rechargeMethod === "card" ? "bounceIn" : "fadeIn"
+                    }
                     duration={400}
                   >
                     <Pressable
@@ -208,7 +213,11 @@ export default function TransfertScreen() {
 
                 <Animatable.View
                   key={rechargeMethod}
-                  animation={rechargeMethod === "mobile-money" ? "fadeInRight" : "fadeInLeft"}
+                  animation={
+                    rechargeMethod === "mobile-money"
+                      ? "fadeInRight"
+                      : "fadeInLeft"
+                  }
                   duration={400}
                   className="w-full"
                 >
@@ -221,7 +230,8 @@ export default function TransfertScreen() {
                       >
                         <View className="flex-row gap-2">
                           {operators.map((operator) => {
-                            const isSelected = selectedOperator === operator.slug;
+                            const isSelected =
+                              selectedOperator === operator.slug;
                             return (
                               <Animatable.View
                                 key={operator.id}

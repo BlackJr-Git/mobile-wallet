@@ -1,10 +1,9 @@
-import ProfileSheet from "@/components/home/ProfileSheet";
+import BackButton from "@/components/BackButton";
 import NotificationsModal from "@/components/notifications/NotificationsModal";
 import Icon from "@/components/ui/Icon";
 import React, { useState } from "react";
 import { Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
 import * as Animatable from "react-native-animatable";
-import BackButton from "@/components/BackButton";
 
 // Types
 interface Transaction {

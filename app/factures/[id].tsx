@@ -1,3 +1,4 @@
+import BackButton from "@/components/BackButton";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 import PressableIcon from "@/components/ui/PressableIcon";
@@ -215,13 +216,13 @@ export default function InvoiceDetailsScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-background relative">
       {/* Header */}
-      <Animatable.View
+      {/* <Animatable.View
         animation="fadeInDown"
         className="flex-row items-center justify-between px-6 py-4 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700"
-      >
-        <Pressable
+      > */}
+      {/* <Pressable
           onPress={() => router.back()}
           className="p-2 rounded-full bg-gray-100 dark:bg-gray-800"
         >
@@ -243,8 +244,23 @@ export default function InvoiceDetailsScreen() {
             color="#6366f1"
             iconSize={20}
           />
-        </View>
-      </Animatable.View>
+        </View> */}
+
+      <View className="w-full flex-row items-center justify-between px-6 pb-4 mb-4 z-10 bg-background">
+        {/* <ProfileSheet /> */}
+        <BackButton />
+        {/* <Logo variant="default" size="small" /> */}
+        <Text className="text-2xl font-bold text-indigo-500 dark:text-indigo-400">
+          Détails de la facture
+        </Text>
+        <PressableIcon
+          onPress={handleShare}
+          name="Share"
+          color="#6366f1"
+          iconSize={20}
+        />
+      </View>
+      {/* </Animatable.View> */}
 
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         {/* Invoice Header */}
@@ -535,6 +551,13 @@ export default function InvoiceDetailsScreen() {
           </View>
         </Animatable.View>
       </ScrollView>
+      <PressableIcon
+        onPress={handleDownload}
+        name="Download"
+        color="#6366f1"
+        iconSize={20}
+        className="absolute bottom-12 right-12 bg-white dark:bg-gray-800 p-4 rounded-full"
+      />
     </SafeAreaView>
   );
 }

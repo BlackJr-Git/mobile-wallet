@@ -1,5 +1,3 @@
-import CreditCardIcon from "@/assets/images/credit card.svg";
-import ProfileSheet from "@/components/home/ProfileSheet";
 import NotificationsModal from "@/components/notifications/NotificationsModal";
 import PaymentMethodModal, {
   PaymentMethodModalRef,
