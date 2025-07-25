@@ -30,7 +30,7 @@ const creditCards: CreditCardItemProps[] = [
   },
   {
     id: 2,
-    accountNumber: "1234567890",
+    accountNumber: "1234567890232321",
     balance: "1,000,000",
     currency: "CDF",
     userName: "Junior Asosa",

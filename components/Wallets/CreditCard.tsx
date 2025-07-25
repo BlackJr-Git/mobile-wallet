@@ -3,6 +3,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { ColorValue, Text, View } from "react-native";
 import SimImg from "../../assets/images/sim.svg";
 
+import * as Animatable from "react-native-animatable";
+
 type CreditCardItemProps = {
   id: number;
   accountNumber: string;
@@ -23,51 +25,79 @@ export default function CreditCardItem({
   colors,
 }: CreditCardItemProps) {
   return (
-    <LinearGradient
-      colors={colors}
-      end={{ x: 0, y: 0 }}
-      start={{ x: 1, y: 1 }}
-      style={{
-        alignItems: "center",
-        justifyContent: "space-between",
-        borderRadius: 16,
-        marginRight: 16,
-        width: 320,
-        height: 192,
-        padding: 16,
-      }}
+    <Animatable.View
+      animation="fadeInUp"
+      delay={100}
+      className="shadow-xl"
+      style={{ marginRight: 16 }}
     >
-      <View className="flex-row items-center justify-between w-full">
-        <Logo variant="default" size="small" />
-        {/* <Image source={simImg} className="w-12 h-12" /> */}
-        <SimImg className="w-24 h-24" />
-      </View>
-      <View className="flex-row items-center gap-2 w-full justify-between">
-        <Text className="text-white text-lg font-bold">
-          {accountNumber.slice(0, 4) +
-            " " +
-            accountNumber.slice(4, 8) +
-            " " +
-            accountNumber.slice(8, 12) +
-            " " +
-            accountNumber.slice(12, 16)}
-        </Text>
-        <Text className="text-white text-lg font-bold">
-          {balance} {currency === "CDF" ? "Fc" : "$"}
-        </Text>
-      </View>
-      <View className="w-full flex-row justify-between">
-        <View className="flex-col gap-1">
-          <Text className="text-white text-sm">Nom du titulaire</Text>
-          <Text className="text-white text-base font-bold">{userName}</Text>
+      <LinearGradient
+        colors={colors}
+        end={{ x: 0, y: 0 }}
+        start={{ x: 1, y: 1 }}
+        style={{
+          borderRadius: 20,
+          width: 320,
+          height: 192,
+          overflow: "hidden",
+        }}
+      >
+        {/* Glassmorphism overlay */}
+        <View
+          className="absolute inset-0 bg-white/20 dark:bg-black/20 backdrop-blur-md rounded-2xl"
+          pointerEvents="none"
+        />
+        <View className="flex-row items-center justify-between w-full px-4 pt-4">
+          <SimImg className="w-10 h-10 opacity-80" />
+          <Logo variant="default" size="small" />
         </View>
-        <View className="flex-col gap-1">
-          <Text className="text-white text-sm">Portmonnaie</Text>
-          <Text className="text-white text-base font-bold">
-            {currency === "CDF" ? "Francs Congolais" : "Dollars"}
+        <View className="flex-1 flex-col justify-center px-4">
+          {/* Card Number */}
+          <Text
+            className="text-white text-lg md:text-xl font-mono tracking-widest font-bold drop-shadow-lg mb-2"
+            style={{
+              textShadowColor: "#0008",
+              textShadowOffset: { width: 0, height: 2 },
+              textShadowRadius: 6,
+            }}
+          >
+            {accountNumber.replace(/(.{4})/g, "$1 ").trim()}
           </Text>
+          {/* Balance + Currency badge */}
+          <View className="flex-row items-center gap-2 mb-2">
+            <Text
+              className="text-white text-2xl font-bold drop-shadow-lg"
+              style={{
+                textShadowColor: "#0008",
+                textShadowOffset: { width: 0, height: 2 },
+                textShadowRadius: 6,
+              }}
+            >
+              {balance}
+            </Text>
+            <View className="bg-white/40 dark:bg-black/40 px-2 py-0.5 rounded-full ml-1">
+              <Text className="text-xs font-bold text-white drop-shadow">
+                {currency === "CDF" ? "Fc" : "$"}
+              </Text>
+            </View>
+          </View>
         </View>
-      </View>
-    </LinearGradient>
+        {/* Bottom info */}
+        <View className="flex-row items-end justify-between w-full px-4 pb-4">
+          <View className="flex-col gap-0.5">
+            <Text className="text-white text-xs opacity-80">
+              Nom du titulaire
+            </Text>
+            <Text className="text-white text-base font-bold">{userName}</Text>
+          </View>
+          <View className="flex-col gap-0.5 items-end">
+            <Text className="text-white text-xs opacity-80">Portemonnaie</Text>
+            <Text className="text-white text-base font-bold">
+              {currency === "CDF" ? "Francs Congolais" : "Dollars"}
+            </Text>
+          </View>
+        </View>
+      </LinearGradient>
+    </Animatable.View>
   );
 }
