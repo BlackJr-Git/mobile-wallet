@@ -102,7 +102,7 @@ export default function WalletScreen() {
   return (
     <SafeAreaView>
       <View className="w-full relative">
-        <View className="w-full flex-row items-center justify-between absolute px-6 z-10 bg-background">
+        <View className="w-full flex-row items-center justify-between px-6 z-10 bg-background">
           <ProfileSheet />
           {/* <Logo variant="default" size="small" /> */}
           <Text className="text-2xl font-bold text-indigo-500 dark:text-indigo-400">
@@ -110,9 +110,7 @@ export default function WalletScreen() {
           </Text>
           <NotificationsModal />
         </View>
-        <ScrollView className="w-full px-6 mt-20 mb-32">
-          <View className="w-full">
-            <View className="flex-1 flex-row items-center justify-between mb-4 gap-4">
+        <View className="flex-row items-center justify-between mb-4 gap-4 mt-6 px-6">
               <SelectInput
                 className="flex-1 rounded-2xl"
                 placeholder="Tout"
@@ -132,6 +130,13 @@ export default function WalletScreen() {
               />
             </View>
             <Divider />
+        <ScrollView
+          className="w-full px-6"
+          contentContainerStyle={{ flexGrow: 1, paddingBottom: 350 }}
+          showsVerticalScrollIndicator={false}
+        >
+          <View className="w-full">
+            
             <View className="w-full flex-col gap-2 mt-4">
               {Transactions.map((transaction) => (
                 <TransactionCard
