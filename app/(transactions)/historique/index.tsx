@@ -2,14 +2,7 @@ import ProfileSheet from "@/components/home/ProfileSheet";
 import NotificationsModal from "@/components/notifications/NotificationsModal";
 import Icon from "@/components/ui/Icon";
 import React, { useState } from "react";
-import {
-  Pressable,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 
 // Types
@@ -101,21 +94,17 @@ export default function HistoriqueScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-        {/* Header */}
-        <View className="w-full flex-row items-center justify-between px-6 pb-4 mb-4 z-10 bg-background">
-          <ProfileSheet />
-          {/* <Logo variant="default" size="small" /> */}
-          <Text className="text-2xl font-bold dark:text-white">Historique</Text>
-          <NotificationsModal />
-        </View>
+    <SafeAreaView className="flex-1 bg-gray-50 dark:bg-background-0">
+      {/* Header */}
+      <View className="w-full flex-row items-center justify-between px-6 pb-4 mb-4 z-10 bg-background">
+        <ProfileSheet />
+        {/* <Logo variant="default" size="small" /> */}
+        <Text className="text-2xl font-bold text-indigo-500 dark:text-indigo-400">
+          Historique
+        </Text>
+        <NotificationsModal />
+      </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        
-        {/* Title */}
-        {/* <Animatable.View animation="fadeInUp" delay={200}>
-          <Text style={styles.title}>Historique des transactions</Text>
-        </Animatable.View> */}
-
         {/* Filter Tabs */}
         <Animatable.View animation="fadeInUp" delay={300}>
           <FilterTabs
@@ -123,15 +112,9 @@ export default function HistoriqueScreen() {
             onFilterChange={setSelectedFilter}
           />
         </Animatable.View>
-
-        {/* Transaction Summary */}
-        {/* <Animatable.View animation="fadeInUp" delay={400}>
-          <TransactionSummary transactions={filteredTransactions} />
-        </Animatable.View> */}
-
         {/* Transaction List */}
         <Animatable.View animation="fadeInUp" delay={500}>
-          <View style={styles.transactionList}>
+          <View className="px-5">
             {filteredTransactions.length > 0 ? (
               filteredTransactions.map((transaction, index) => (
                 <TransactionItem
@@ -188,22 +171,24 @@ function FilterTabs({ selectedFilter, onFilterChange }: FilterTabsProps) {
   ];
 
   return (
-    <View style={styles.filterContainer}>
+    <View className="px-5 mb-5">
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {filters.map((filter) => (
           <Pressable
             key={filter.key}
-            style={[
-              styles.filterTab,
-              selectedFilter === filter.key && styles.activeFilterTab,
-            ]}
+            className={`px-4 py-2 mr-3 rounded-full ${
+              selectedFilter === filter.key
+                ? "bg-indigo-500"
+                : "bg-gray-200 dark:bg-gray-700"
+            }`}
             onPress={() => onFilterChange(filter.key)}
           >
             <Text
-              style={[
-                styles.filterText,
-                selectedFilter === filter.key && styles.activeFilterText,
-              ]}
+              className={`text-sm font-medium ${
+                selectedFilter === filter.key
+                  ? "text-white"
+                  : "text-gray-600 dark:text-gray-300"
+              }`}
             >
               {filter.label}
             </Text>
@@ -304,18 +289,18 @@ function TransactionItem({
     }
   };
 
-  const getStatusColor = (status: Transaction["status"]) => {
-    switch (status) {
-      case "completed":
-        return "#10B981";
-      case "pending":
-        return "#F59E0B";
-      case "failed":
-        return "#EF4444";
-      default:
-        return "#6B7280";
-    }
-  };
+  // const getStatusColor = (status: Transaction["status"]) => {
+  //   switch (status) {
+  //     case "completed":
+  //       return "#10B981";
+  //     case "pending":
+  //       return "#F59E0B";
+  //     case "failed":
+  //       return "#EF4444";
+  //     default:
+  //       return "#6B7280";
+  //   }
+  // };
 
   const getStatusText = (status: Transaction["status"]) => {
     switch (status) {
@@ -332,48 +317,50 @@ function TransactionItem({
 
   return (
     <Animatable.View animation="fadeInUp" delay={delay}>
-      <View style={styles.transactionItem}>
-        <View style={styles.transactionIcon}>
+      <View className="flex-row items-center bg-white dark:bg-gray-800 p-4 rounded-2xl mb-3 shadow-sm">
+        <View className="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-900 items-center justify-center mr-3">
           <Icon
             name={getTransactionIcon(transaction.type)}
             size={24}
             color={getTransactionColor(transaction.type)}
           />
         </View>
-        <View style={styles.transactionDetails}>
-          <Text style={styles.transactionDescription}>
+        <View className="flex-1">
+          <Text className="text-base font-semibold text-foreground dark:text-white mb-0.5">
             {transaction.description}
           </Text>
           {(transaction.recipient ||
             transaction.sender ||
             transaction.operator) && (
-            <Text style={styles.transactionSubtext}>
+            <Text className="text-sm text-gray-500 dark:text-gray-400 mb-0.5">
               {transaction.recipient && `Vers: ${transaction.recipient}`}
               {transaction.sender && `De: ${transaction.sender}`}
               {transaction.operator && `Opérateur: ${transaction.operator}`}
             </Text>
           )}
-          <Text style={styles.transactionDate}>
+          <Text className="text-xs text-gray-400 dark:text-gray-500">
             {formatDate(transaction.date)}
           </Text>
         </View>
-        <View style={styles.transactionAmount}>
+        <View className="items-end">
           <Text
-            style={[
-              styles.amountText,
-              {
-                color: transaction.type === "received" ? "#10B981" : "#EF4444",
-              },
-            ]}
+            className={`text-base font-bold mb-0.5 ${
+              transaction.type === "received"
+                ? "text-green-600"
+                : "text-red-500"
+            }`}
           >
             {transaction.type === "received" ? "+" : "-"}
             {transaction.amount} {transaction.currency}
           </Text>
           <Text
-            style={[
-              styles.statusText,
-              { color: getStatusColor(transaction.status) },
-            ]}
+            className={`text-xs font-medium ${
+              transaction.status === "completed"
+                ? "text-green-600"
+                : transaction.status === "pending"
+                ? "text-yellow-600"
+                : "text-red-500"
+            }`}
           >
             {getStatusText(transaction.status)}
           </Text>
@@ -389,179 +376,28 @@ interface EmptyStateProps {
 }
 
 function EmptyState({ filter }: EmptyStateProps) {
-  const getMessage = () => {
-    switch (filter) {
-      case "completed":
-        return "Aucune transaction terminée";
-      case "pending":
-        return "Aucune transaction en cours";
-      case "failed":
-        return "Aucune transaction échouée";
-      default:
-        return "Aucune transaction trouvée";
-    }
-  };
+  let message = "Aucune transaction trouvée.";
+  let subtext = "Il n'y a pas de transactions pour ce filtre.";
+  if (filter === "completed") {
+    message = "Aucune transaction terminée.";
+    subtext = "Vous n'avez pas encore de transactions terminées.";
+  } else if (filter === "pending") {
+    message = "Aucune transaction en cours.";
+    subtext = "Vous n'avez pas encore de transactions en attente.";
+  } else if (filter === "failed") {
+    message = "Aucune transaction échouée.";
+    subtext = "Vous n'avez pas encore de transactions échouées.";
+  }
 
   return (
-    <Animatable.View animation="fadeIn" style={styles.emptyState}>
-      <Icon name="Receipt" size={64} color="#D1D5DB" />
-      <Text style={styles.emptyStateText}>{getMessage()}</Text>
-      <Text style={styles.emptyStateSubtext}>
-        Vos transactions apparaîtront ici une fois effectuées
+    <View className="items-center py-16">
+      <Icon name="Inbox" size={48} color="#6366f1" />
+      <Text className="text-lg font-semibold text-indigo-500 mt-4 mb-2 text-center">
+        {message}
       </Text>
-    </Animatable.View>
+      <Text className="text-sm text-gray-400 dark:text-gray-500 text-center px-6">
+        {subtext}
+      </Text>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F8FAFC",
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    paddingTop: 10,
-    paddingBottom: 20,
-  },
-  headerButton: {
-    padding: 8,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#1F2937",
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  filterContainer: {
-    paddingHorizontal: 20,
-    marginBottom: 20,
-  },
-  filterTab: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    marginRight: 12,
-    borderRadius: 20,
-    backgroundColor: "#E5E7EB",
-  },
-  activeFilterTab: {
-    backgroundColor: "#4A67FF",
-  },
-  filterText: {
-    fontSize: 14,
-    fontWeight: "500",
-    color: "#6B7280",
-  },
-  activeFilterText: {
-    color: "#FFFFFF",
-  },
-  summaryContainer: {
-    flexDirection: "row",
-    paddingHorizontal: 20,
-    marginBottom: 20,
-    gap: 12,
-  },
-  summaryCard: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-    padding: 16,
-    borderRadius: 12,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  summaryLabel: {
-    fontSize: 12,
-    color: "#6B7280",
-    marginBottom: 4,
-  },
-  summaryValue: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#1F2937",
-  },
-  transactionList: {
-    paddingHorizontal: 20,
-  },
-  transactionItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 12,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  transactionIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: "#F3F4F6",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 12,
-  },
-  transactionDetails: {
-    flex: 1,
-  },
-  transactionDescription: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#1F2937",
-    marginBottom: 2,
-  },
-  transactionSubtext: {
-    fontSize: 14,
-    color: "#6B7280",
-    marginBottom: 2,
-  },
-  transactionDate: {
-    fontSize: 12,
-    color: "#9CA3AF",
-  },
-  transactionAmount: {
-    alignItems: "flex-end",
-  },
-  amountText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 2,
-  },
-  statusText: {
-    fontSize: 12,
-    fontWeight: "500",
-  },
-  emptyState: {
-    alignItems: "center",
-    paddingVertical: 60,
-  },
-  emptyStateText: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#6B7280",
-    marginTop: 16,
-    marginBottom: 8,
-  },
-  emptyStateSubtext: {
-    fontSize: 14,
-    color: "#9CA3AF",
-    textAlign: "center",
-    paddingHorizontal: 40,
-  },
-});

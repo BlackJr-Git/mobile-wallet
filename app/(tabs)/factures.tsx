@@ -105,7 +105,7 @@ export default function WalletScreen() {
         <View className="w-full flex-row items-center justify-between absolute px-6 z-10 bg-background">
           <ProfileSheet />
           {/* <Logo variant="default" size="small" /> */}
-          <Text className="text-foreground dark:text-white text-2xl">
+          <Text className="text-2xl font-bold text-indigo-500 dark:text-indigo-400">
             Factures
           </Text>
           <NotificationsModal />

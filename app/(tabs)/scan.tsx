@@ -86,7 +86,7 @@ export default function ScanScreen() {
         <ProfileSheet />
         <Text
           style={styles.headerText}
-          className="text-foreground dark:text-white"
+          className="text-2xl font-bold text-indigo-500 dark:text-indigo-400"
         >
           Scanner pour payer
         </Text>

@@ -123,7 +123,7 @@ export default function TransfertScreen() {
           <View className="w-full flex-row items-center justify-between px-6 pb-4 mb-4 z-10 bg-background">
             <ProfileSheet />
             {/* <Logo variant="default" size="small" /> */}
-            <Text className="text-2xl font-bold dark:text-white">Recharge</Text>
+            <Text className="text-2xl font-bold text-indigo-500 dark:text-indigo-400">Recharge</Text>
             <NotificationsModal />
           </View>
           <ScrollView
