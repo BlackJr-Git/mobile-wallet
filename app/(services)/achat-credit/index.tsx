@@ -6,6 +6,7 @@ import PaymentMethodModal, {
 } from "@/components/payment/PaymentMethod";
 // import Logo from "@/components/ui/Logo";
 import Button from "@/components/ui/Button";
+import { useRouter } from "expo-router";
 import React, { useCallback, useRef } from "react";
 import {
   Image,
@@ -81,6 +82,7 @@ const paymentMethods: PaymentMethodType[] = [
 ];
 
 export default function AchatCredit() {
+  const router = useRouter();
   const paymentMethodModalRef = useRef<PaymentMethodModalRef>(null);
   const openSheet = useCallback(() => {
     paymentMethodModalRef.current?.expand();
@@ -95,7 +97,9 @@ export default function AchatCredit() {
       <View className="w-full flex-row items-center justify-between px-6 pb-4 mb-4 z-10 bg-background">
         <ProfileSheet />
         {/* <Logo variant="default" size="small" /> */}
-        <Text className="text-2xl font-bold text-indigo-500 dark:text-indigo-400">Achat crédit</Text>
+        <Text className="text-2xl font-bold text-indigo-500 dark:text-indigo-400">
+          Achat crédit
+        </Text>
         <NotificationsModal />
       </View>
       <ScrollView>
@@ -183,7 +187,10 @@ export default function AchatCredit() {
           />
         </View>
         <View className="w-full px-6 mt-4">
-          <Button title="Continuer" onPress={() => {}} />
+          <Button
+            title="Continuer"
+            onPress={() => router.push("/(services)/achat-credit/[id]")}
+          />
         </View>
       </ScrollView>
       <PaymentMethodModal
