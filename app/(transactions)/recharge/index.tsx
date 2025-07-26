@@ -19,6 +19,7 @@ import {
   View,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
+import { useRouter } from "expo-router";
 
 interface PaymentMethodType {
   id: number;
@@ -96,6 +97,7 @@ const operators = [
 // ];
 
 export default function TransfertScreen() {
+  const router = useRouter()
   const paymentMethodModalRef = useRef<PaymentMethodModalRef>(null);
   const [amount, setAmount] = useState("");
   const [rechargeMethod, setRechargeMethod] = useState<string>("mobile-money");
@@ -111,6 +113,7 @@ export default function TransfertScreen() {
   const handleSubmit = () => {
     // TODO: implement submit logic
     console.log(amount, rechargeMethod, selectedPaymentMethod);
+    router.push("/recharge/[id]")
   };
 
   return (

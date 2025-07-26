@@ -11,8 +11,10 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSCameraUsageDescription": "This app uses the camera to scan QR codes."
-      }
+        "NSCameraUsageDescription": "This app uses the camera to scan QR codes.",
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "bundleIdentifier": "com.blackjrgit.fpayrn"
     },
     "android": {
       "adaptiveIcon": {

@@ -357,7 +357,7 @@ export default function NotificationsModal() {
         animationType="slide"
         presentationStyle="formSheet"
       >
-        <View className="w-full h-full bg-background-0 p-6">
+        <View className="w-full h-full bg-white dark:bg-gray-900 p-6">
           <View className="flex-row items-center justify-between">
             <Text className="text-2xl font-bold dark:text-white">
               Notifications (5)
@@ -374,7 +374,7 @@ export default function NotificationsModal() {
               (section) => (
                 <View key={section.title} className="mb-2">
                   <Text className="text-lg font-bold mb-2 text-slate-600 dark:text-slate-300">
-                    {section.title}
+                    {section.title} junior 
                   </Text>
                   {section.data.map((notification) => (
                     <NotificationItem
